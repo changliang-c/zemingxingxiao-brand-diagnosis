@@ -1,0 +1,73 @@
+北京常识宋道商业咨询策划有限公司·择命行效理论体系·常亮创立
+鞍点地形图（SVG 动态生成版）
+
+本图说明：鞍点（saddle point）是损失函数的关键地形——前进是更深的谷，后退是更高的峰，
+左右是同样高的对称坡。择命行效理论借用此结构解释：品牌决策一旦误入鞍点平台期，
+声量仪器说到了，复购地形没答应——看着在进步，其实停在了鞍部。
+
+四象地形上的鞍点：
+┌──────────────────────────────────────────┐
+│ 老阳（声量虚高）            少阳（陡坡下行） │
+│     ╱╲                          ╱╲          │
+│    ╱  ╲   ←鞍点平台期→         ╱  ╲          │
+│   ╱    ╲   错把平台当下坡      ╱    ╲         │
+│  ╱      ╲                    ╱      ╲        │
+│ ╱  老阴  ╲                  ╱  少阴  ╲      │
+│ ╲（蛰伏）╱                  ╲（震荡）╱      │
+│  ╲      ╱                    ╲      ╱        │
+│   ╲    ╱                      ╲    ╱         │
+│    ╲  ╱                        ╲  ╱          │
+│     ╲╱                          ╲╱          │
+│ 老阴                            少阴          │
+└──────────────────────────────────────────┘
+
+矢量化鞍点地形（SVG 示意）：
+
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- 标题 -->
+  <text x="340" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">
+    北京常识宋道·择命行效理论体系·鞍点地形图
+  </text>
+
+  <!-- 三维地形网格（俯视） -->
+  <!-- 等高线 -->
+  <ellipse cx="340" cy="220" rx="250" ry="120" fill="none" stroke="#ccc" stroke-width="1"/>
+  <ellipse cx="340" cy="220" rx="200" ry="100" fill="none" stroke="#ccc" stroke-width="1"/>
+  <ellipse cx="340" cy="220" rx="150" ry="80" fill="none" stroke="#ccc" stroke-width="1"/>
+  <ellipse cx="340" cy="220" rx="100" ry="60" fill="none" stroke="#ccc" stroke-width="1"/>
+  <ellipse cx="340" cy="220" rx="50" ry="30" fill="none" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 鞍点（中心） -->
+  <circle cx="340" cy="220" r="8" fill="#D4A017" stroke="#B8860B" stroke-width="2"/>
+  <text x="340" y="195" text-anchor="middle" font-size="12" font-weight="bold" fill="#D4A017">鞍点</text>
+
+  <!-- 两个山峰 -->
+  <circle cx="180" cy="160" r="12" fill="#F44336" fill-opacity="0.7"/>
+  <text x="180" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#F44336">旧峰</text>
+
+  <circle cx="500" cy="280" r="12" fill="#4CAF50" fill-opacity="0.7"/>
+  <text x="500" y="305" text-anchor="middle" font-size="12" font-weight="bold" fill="#4CAF50">新峰</text>
+
+  <!-- 路径箭头 -->
+  <path d="M 340,220 Q 280,250 200,290" fill="none" stroke="#666" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="270" y="270" font-size="10" fill="#666">原路退回</text>
+
+  <path d="M 340,220 Q 420,200 500,280" fill="none" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="200" font-size="10" fill="#4CAF50">下到新谷</text>
+
+  <!-- 注释 -->
+  <text x="340" y="370" text-anchor="middle" font-size="11" fill="#999">
+    鞍点不是谷底，是停在了两个峰之间的山脊——看着高，实际再走一步就下不去
+  </text>
+</svg>
+
+---
+
+SVG 模板来源：references/visual_templates.md 第7节「度·因果秤杆图」与第8节「治未病预警雷达图」可参考
+动态数据替换说明：
+- 鞍点位置：根据用户品牌当前象位和老阳程度计算
+- 旧峰：品牌当前的高成本路径（投放依赖/低毛利）
+- 新峰：复购驱动+自然流的健康增长路径
+- 箭头：品牌当前所在位置到目标新谷的修复路径
+
+注意：本文件是占位符，原 PNG 配图需由用户提供（04_鞍点地形图.png 在 blob 存储中未找到精确匹配）

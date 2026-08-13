@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【品牌名】品牌诊断报告</title>
+<style>
+  /* === 全局 === */
+  body {
+    margin: 0; padding: 40px 20px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    color: #2c2c2c; line-height: 1.9; background: #fff;
+  }
+  /* === 水印：半透明"择命行效"全页重复 === */
+  body::before {
+    content: "择命行效";
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 200px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.04);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 30px;
+  }
+  body::after {
+    content: "择命行效";
+    position: fixed; top: 15%; left: 8%;
+    transform: rotate(-30deg);
+    font-size: 150px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.03);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 20px;
+  }
+  /* === 报告容器 === */
+  .report { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  /* === 标题区 === */
+  .report-header { text-align: center; border-bottom: 3px solid #D4A017; padding-bottom: 24px; margin-bottom: 32px; }
+  .report-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; }
+  .report-subtitle { font-size: 14px; color: #666; line-height: 1.6; }
+  .report-subtitle .theory-name { font-weight: 600; color: #D4A017; }
+  /* === 正文节 === */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a1a; border-left: 4px solid #D4A017; padding-left: 12px; margin: 0 0 12px 0; }
+  .section-content { font-size: 15px; color: #333; }
+  /* === 状态标记 === */
+  .status { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; margin: 0 4px; }
+  .status.cheng { background: #e8f5e9; color: #2e7d32; }
+  .status.xiu { background: #fff3e0; color: #e65100; }
+  .status.duan { background: #ffebee; color: #c62828; }
+  /* === SVG 图表区 === */
+  .chart-container { margin: 16px 0; text-align: center; }
+  .chart-container svg { max-width: 100%; height: auto; }
+  .chart-caption { font-size: 13px; color: #888; margin-top: 6px; }
+  /* === 表格 === */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #e0e0e0; padding: 8px 12px; text-align: left; }
+  th { background: #fafafa; font-weight: 600; }
+  /* === 落款 === */
+  .footer-disclaimer { margin-top: 40px; padding: 20px; border-top: 2px solid #e0e0e0; font-size: 13px; color: #888; line-height: 1.8; }
+  /* === 五行配色 === */
+  .ele-jin { color: #D4A017; }
+  .ele-shui { color: #2196F3; }
+  .ele-mu { color: #4CAF50; }
+  .ele-huo { color: #F44336; }
+  .ele-tu { color: #795548; }
+  /* === 打印 === */
+  @media print {
+    body { padding: 0; }
+    body::before, body::after { opacity: 0.06 !important; }
+    .report { max-width: none; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ====== 标题区（主标题必须含品牌名，副标题固定） ====== -->
+  <div class="report-header">
+    <h1 class="report-title"><!-- 填入品牌/项目名 -->品牌诊断报告</h1>
+    <div class="report-subtitle">
+      理论依据：<span class="theory-name">择命行效-行之有效的五行商业诊断理论体系</span><br>
+      理论创立：常亮 ｜ 出品方：北京常识宋道商业咨询策划有限公司
+    </div>
+  </div>
+
+  <!-- ====== 〇 诊断摘要（三句话：入象+断链环+处方方向） ====== -->
+  <div class="section">
+    <h2 class="section-title">〇 诊断摘要</h2>
+    <div class="section-content">
+      <p><!-- ①入象（定性） --></p>
+      <p><!-- ②断链环（定位） --></p>
+      <p><!-- ③处方方向（定向） --></p>
+    </div>
+  </div>
+
+  <!-- ====== 一至五·五诊各一节（现状→判定→方） ====== -->
+  <!-- 每节结构相同，以金为例，水木火土复制此结构改标题与配色 -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-jin">一 之金·下刀诊</span>（定位取舍）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong><!-- 品牌定位现状 --></p>
+      <p><strong>判定：</strong><!-- 成/锈/断 + 依据 --> <span class="status cheng">成</span><span class="status xiu">锈</span><span class="status duan">断</span></p>
+      <p><strong>方：</strong><!-- 修复方向 --></p>
+    </div>
+  </div>
+
+  <!-- 二 行水·引水诊（ele-shui）· 三 有木·植树诊（ele-mu）· 四 效火·点火诊（ele-huo）· 五 归土·归藏诊（ele-tu）结构同上 -->
+
+  <!-- ====== 六 四象判定 ====== -->
+  <div class="section">
+    <h2 class="section-title">六 四象判定</h2>
+    <div class="section-content">
+      <p><!-- 何象 + 依据 + 对照案例位置 --></p>
+    </div>
+  </div>
+
+  <!-- ====== 七 修复顺序（顺行五行链，严禁乱序） ====== -->
+  <div class="section">
+    <h2 class="section-title">七 修复顺序</h2>
+    <div class="section-content">
+      <p><!-- 第1环 → 第2环 → 第3环 --></p>
+    </div>
+  </div>
+
+  <!-- ====== 八 验收标准（90天复检·土指标三件套） ====== -->
+  <div class="section">
+    <h2 class="section-title">八 验收标准</h2>
+    <div class="section-content">
+      <p>复购率目标：<!-- XX% --></p>
+      <p>自然流占比目标：<!-- XX% --></p>
+      <p>老客成交占比目标：<!-- XX% --></p>
+    </div>
+  </div>
+
+  <!-- ====== 九 可视化图表（SVG直接嵌入，禁止退化为markdown表格） ====== -->
+  <div class="section">
+    <h2 class="section-title">九 可视化图表</h2>
+    <!-- ①五行链条诊断图 -->
+    <div class="chart-container">
+      <!-- <svg>五行链环形结构，每环标注成/锈/断状态</svg> -->
+      <div class="chart-caption">五行链条诊断图</div>
+    </div>
+    <!-- ②四象定位图 -->
+    <div class="chart-container">
+      <!-- <svg>X=引水能力 Y=点火能力，标注品牌象位+对照案例</svg> -->
+      <div class="chart-caption">四象定位图</div>
+    </div>
+    <!-- ③断链与修复序列表（HTML表格，非markdown） -->
+    <div class="chart-container">
+      <table><tr><th>五行</th><th>状态</th><th>断链点</th><th>修复优先级</th><th>预计周期</th></tr><!-- 数据行 --></table>
+      <div class="chart-caption">断链与修复序列表</div>
+    </div>
+    <!-- ④治未病预警雷达图 -->
+    <div class="chart-container">
+      <!-- <svg>五维雷达(金/水/木/火/土)+预警阈值线</svg> -->
+      <div class="chart-caption">治未病预警雷达图</div>
+    </div>
+  </div>
+
+  <!-- ====== 落款免责声明（固定，不可省略） ====== -->
+  <div class="footer-disclaimer">
+    <p><strong>免责声明</strong></p>
+    <p>本工具为开源协作版，供个人学习免费使用。商业使用（含企业内训、咨询交付、付费课程引用等），请咨询北京常识宋道商业咨询策划有限公司官方渠道。</p>
+    <p>理论体系著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。</p>
+    <p>本报告由 AI 基于「择命行效-行之有效的五行商业诊断理论体系」生成，诊断结论仅供参考，不构成投资或经营决策的唯一依据。</p>
+  </div>
+
+</div>
+</body>
+</html>

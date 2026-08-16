@@ -11,6 +11,8 @@ test_baselines/
 # OS files
 Thumbs.db
 .DS_Store
+~$*
+*.bak
 
 # IDE
 .vscode/

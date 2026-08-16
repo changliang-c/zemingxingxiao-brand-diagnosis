@@ -501,16 +501,58 @@ def test_diagnostic_flow(suite):
         return True, "问金三刀完整（心智阶梯→空位探测→对立面校验）"
     suite.run_test("问金三刀完整", t, "P1")
 
-    # 4.8 逐刀推进·硬约束
+    # 4.8 三刀执行·硬约束（v2.4 由逐刀推进升级）
     def t():
-        if "逐刀推进" not in content or "硬约束" not in content:
-            return False, "缺少逐刀推进·硬约束"
-        if "不得进入" not in content:
-            return False, "缺少'不得进入下一刀'约束"
-        if "合并为问卷" not in content:
-            return False, "缺少'禁止合并为问卷'约束"
-        return True, "逐刀推进·硬约束完整"
-    suite.run_test("逐刀推进·硬约束", t, "P1")
+        if "三刀执行" not in content or "硬约束" not in content:
+            return False, "缺少三刀执行·硬约束"
+        if "禁止跳刀" not in content:
+            return False, "缺少'禁止跳刀'约束"
+        if "心智阶梯扫描" not in content or "空位探测" not in content or "对立面校验" not in content:
+            return False, "缺少三刀顺序定义"
+        return True, "三刀执行·硬约束完整"
+    suite.run_test("三刀执行·硬约束", t, "P1")
+
+    # 4.8a 取证优先·硬约束（v2.4 新增）
+    def t():
+        if "取证优先" not in content:
+            return False, "缺少取证优先·硬约束"
+        if "估计" not in content or "预判" not in content:
+            return False, "缺少'禁止估计/预判支撑结论'约束"
+        if "行业功课" not in content:
+            return False, "缺少'进刀前行业功课'要求"
+        return True, "取证优先·硬约束完整"
+    suite.run_test("取证优先·硬约束", t, "P1")
+
+    # 4.8b 问题分流·硬约束（v2.4 新增）
+    def t():
+        if "问题分流" not in content:
+            return False, "缺少问题分流·硬约束"
+        if "客观公开类" not in content or "主观内部类" not in content:
+            return False, "缺少两类信息划分"
+        return True, "问题分流·硬约束完整"
+    suite.run_test("问题分流·硬约束", t, "P1")
+
+    # 4.8c 双模式入口（v2.4 新增）
+    def t():
+        if "双模式" not in content:
+            return False, "缺少双模式入口"
+        if "Chat 模式" not in content or "完整报告模式" not in content:
+            return False, "缺少两模式定义"
+        if "选项化作答" not in content:
+            return False, "缺少'选项化作答'约束"
+        if "收集完再整体分析" not in content:
+            return False, "缺少'收集完再整体分析'约束"
+        return True, "双模式入口完整"
+    suite.run_test("双模式入口", t, "P1")
+
+    # 4.8d 被质疑事实应对（v2.4 新增）
+    def t():
+        if "被质疑事实" not in content:
+            return False, "缺少被质疑事实应对规则"
+        if "认账修正" not in content or "禁止辩解" not in content:
+            return False, "缺少'认账修正/禁止辩解'约束"
+        return True, "被质疑事实应对规则完整"
+    suite.run_test("被质疑事实应对", t, "P1")
 
     # 4.9 内化原则
     def t():

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>极光运动 · 品牌诊断报告</title>
+<style>
+  :root{
+    --ink:#1f2733; --sub:#5b6472; --line:#e3e6ea; --bg:#f6f7f9;
+    --card:#ffffff; --brand:#1e3a5f; --brand2:#c8a24b; --accent:#d9534f;
+    --wood:#4a7c59; --water:#3a6ea5; --fire:#d9534f; --metal:#8a8f98; --earth:#b07d3e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .page{max-width:860px;margin:0 auto;padding:32px 24px 64px;}
+
+  /* 封面 */
+  .cover{background:linear-gradient(135deg,#1e3a5f 0%,#2c5589 100%);color:#fff;border-radius:14px;padding:44px 40px;margin-bottom:28px;}
+  .cover .tag{display:inline-block;font-size:13px;letter-spacing:2px;border:1px solid rgba(255,255,255,.45);border-radius:20px;padding:4px 14px;margin-bottom:18px;}
+  .cover h1{font-size:30px;font-weight:700;letter-spacing:1px;margin-bottom:10px;}
+  .cover p{font-size:15px;opacity:.85;max-width:560px;}
+  .cover .meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;}
+  .cover .meta span{background:rgba(255,255,255,.12);border-radius:8px;padding:6px 14px;font-size:13px;}
+
+  /* 通用 */
+  .section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:30px 32px;margin-bottom:20px;}
+  .section h2{font-size:20px;color:var(--brand);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+  .section h2 .no{background:var(--brand);color:#fff;border-radius:6px;font-size:13px;padding:2px 9px;letter-spacing:1px;}
+  .section .lead{color:var(--sub);font-size:14px;margin-bottom:18px;border-left:3px solid var(--brand2);padding-left:12px;}
+  h3{font-size:16px;color:var(--ink);margin:18px 0 8px;}
+
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 4px;}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+  th{background:#eef1f5;color:var(--brand);font-weight:600;white-space:nowrap;}
+  td.k{white-space:nowrap;color:var(--sub);background:#fafbfc;width:130px;}
+
+  /* 五行体检 */
+  .wuxing{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  .wx-card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fcfcfd;}
+  .wx-card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .wx-card .name{font-weight:600;font-size:14px;}
+  .wx-card .name em{font-style:normal;font-size:12px;color:var(--sub);margin-left:6px;}
+  .wx-card .score{font-size:14px;font-weight:700;}
+  .wx-card .bar{height:8px;background:#eceff3;border-radius:4px;overflow:hidden;margin-bottom:8px;}
+  .wx-card .bar i{display:block;height:100%;border-radius:4px;}
+  .wx-card .desc{font-size:12.5px;color:var(--sub);}
+  .score-high{color:var(--wood);} .score-low{color:var(--accent);} .score-mid{color:var(--earth);}
+  @media(max-width:640px){.wuxing{grid-template-columns:1fr;}}
+
+  /* 因果链 */
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 4px;}
+  .chain .node{background:#f2f5f9;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;}
+  .chain .arrow{color:var(--brand2);font-weight:700;}
+  .chain .node.hot{background:#fdf0ef;border-color:#e8b9b6;color:#a03a36;}
+
+  /* 定位 */
+  .pos-box{background:#f7f3ea;border:1px dashed var(--brand2);border-radius:10px;padding:16px 18px;margin:10px 0;}
+  .pos-box .slogan{font-size:19px;font-weight:700;color:var(--brand);letter-spacing:.5px;}
+  .pos-box .note{font-size:13px;color:var(--sub);margin-top:6px;}
+
+  /* 行动链 */
+  .steps{counter-reset:step;margin-top:8px;}
+  .step{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .idx{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:2px;}
+  .step .body b{display:block;font-size:14.5px;margin-bottom:2px;}
+  .step .body span{font-size:13px;color:var(--sub);}
+
+  /* 风险 */
+  .risk{background:#fdf6f5;border:1px solid #ecd9d7;border-radius:10px;padding:14px 18px;margin-top:8px;font-size:14px;}
+  .risk li{margin-left:18px;margin-bottom:6px;}
+
+  /* 下一步 */
+  .todo li{margin-left:18px;margin-bottom:8px;font-size:14px;}
+  .todo b{color:var(--brand);}
+
+  footer{text-align:center;color:#9aa3ad;font-size:12.5px;padding-top:16px;}
+  footer b{color:var(--sub);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 封面 -->
+  <div class="cover">
+    <span class="tag">择命行效 · 五行商业诊断</span>
+    <h1>极光运动 · 品牌诊断报告</h1>
+    <p>针对"获客成本高企、ROI 下滑"的完整诊断：品牌体检 → 根因分析 → 定位建议 → 五行行动链执行方案。</p>
+    <div class="meta">
+      <span>品牌：极光运动</span>
+      <span>品类：智能健身手环</span>
+      <span>阶段：扩张期</span>
+      <span>报告日期：2026-08-16</span>
+    </div>
+  </div>
+
+  <!-- 一、品牌画像 -->
+  <div class="section">
+    <h2><span class="no">壹</span>品牌画像</h2>
+    <p class="lead">客户提供的基础信息与本报告诊断依据。</p>
+    <table>
+      <tr><td class="k">品牌名称</td><td>极光运动（智能健身手环）</td><td class="k">发展阶段</td><td>扩张期</td></tr>
+      <tr><td class="k">产品口碑</td><td>口碑不错（用户端立得住）</td><td class="k">复购率</td><td>35%</td></tr>
+      <tr><td class="k">老客成交占比</td><td>40%</td><td class="k">自然流量占比</td><td>仅 8%</td></tr>
+      <tr><td class="k">月营销费用 / 营收</td><td>60%（高危）</td><td class="k">停投敏感度</td><td>停投一周销量掉 70%</td></tr>
+      <tr><td class="k">核心痛点</td><td colspan="3">获客成本越来越高，ROI 越来越差；融资已烧大半，现金流承压</td></tr>
+    </table>
+  </div>
+
+  <!-- 二、品牌五行体检 -->
+  <div class="section">
+    <h2><span class="no">贰</span>品牌五行体检</h2>
+    <p class="lead">按「择命行效」五行框架对品牌五大功能系统做健康度评分（满分 10）。</p>
+    <div class="wuxing">
+      <div class="wx-card">
+        <div class="head"><span class="name">木行 · 品牌资产<em>口碑 / 复购 / 留存</em></span><span class="score score-high">8.0</span></div>
+        <div class="bar"><i style="width:80%;background:var(--wood);"></i></div>
+        <div class="desc">复购 35%、老客成交 40%，产品力与口碑扎实——这是全盘最健康的系统。</div>
+      </div>
+      <div class="wx-card">
+        <div class="head"><span class="name">火行 · 转化成交<em>承接 / 成单</em></span><span class="score score-mid">7.0</span></div>
+        <div class="bar"><i style="width:70%;background:var(--fire);"></i></div>
+        <div class="desc">老客成交占比高，成交环节健康。问题不在"会不会卖"，在"谁来买、从哪来"。</div>
+      </div>
+      <div class="wx-card">
+        <div class="head"><span class="name">水行 · 引流获客<em>流量 / 入口</em></span><span class="score score-low">3.0</span></div>
+        <div class="bar"><i style="width:30%;background:var(--water);"></i></div>
+        <div class="desc">自然流量仅 8%，投放依赖 60% 营收，停投即掉 70%——没有源头活水，最致命的短板。</div>
+      </div>
+      <div class="wx-card">
+        <div class="head"><span class="name">金行 · 渠道触点<em>通路 / 触点</em></span><span class="score score-low">3.0</span></div>
+        <div class="bar"><i style="width:30%;background:var(--metal);"></i></div>
+        <div class="desc">投放几乎是唯一触点，渠道单一，未形成多元入口与场景卡位。</div>
+      </div>
+      <div class="wx-card">
+        <div class="head"><span class="name">土行 · 财务根基<em>现金流 / 底盘</em></span><span class="score score-low">4.0</span></div>
+        <div class="bar"><i style="width:40%;background:var(--earth);"></i></div>
+        <div class="desc">月营销费用占营收 60%、融资烧了大半——现金池快速见底，是最紧迫的系统性风险。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、核心诊断 -->
+  <div class="section">
+    <h2><span class="no">叁</span>核心诊断 · 因果链</h2>
+    <p class="lead">表面问题是投放效率，根子在定位与流量结构。</p>
+    <div class="chain">
+      <span class="node hot">定位不聚焦</span><span class="arrow">→</span>
+      <span class="node">人群画像泛</span><span class="arrow">→</span>
+      <span class="node">投放广撒网、精准度差</span><span class="arrow">→</span>
+      <span class="node">获客单价高</span><span class="arrow">→</span>
+      <span class="node">ROI 下滑</span><span class="arrow">→</span>
+      <span class="node hot">被迫加预算维持量</span><span class="arrow">→</span>
+      <span class="node hot">现金流恶化</span>
+    </div>
+    <h3>行业背景（联网调研）</h3>
+    <table>
+      <tr><td class="k">市场格局</td><td>中国手环市场小米+华为合计销量份额超 90%，双寡头固化；行业 2026 Q1 出货同比下滑（中国区 -22.2%），进入结构调整期</td></tr>
+      <tr><td class="k">获客成本</td><td>2025 年行业平均获客成本同比上升约 12%，投放变贵是结构性问题</td></tr>
+      <tr><td class="k">突围路径</td><td>"通用手环"利润池被摊薄，中小品牌唯有垂直场景深耕一条活路（运动、健康、慢病等）</td></tr>
+    </table>
+    <p style="font-size:14px;margin-top:10px;"><b>结论：</b>极光运动缺的不是"更多投放"，是"更准的入口"。ROI 差本质是前端人群不聚焦，而非投放技巧问题。</p>
+  </div>
+
+  <!-- 四、定位建议 -->
+  <div class="section">
+    <h2><span class="no">肆</span>定位建议 · 心智占位</h2>
+    <p class="lead">极光运动不缺产品力，缺的是消费者心里的"一个词"。</p>
+    <div class="pos-box">
+      <div class="slogan">「懂运动的轻智能手环」</div>
+      <div class="note">一句话：运动数据更准、更懂你训练的手环——与华为小米的"全场景/健康"区隔，对标佳明的"专业运动"但更轻、更亲民。</div>
+    </div>
+    <h3>为什么是这个位</h3>
+    <ul class="todo">
+      <li><b>避开正面战场：</b>通用手环已被小米（性价比 63.7% 份额）和华为（健康高端）焊死，正面打没有胜算；</li>
+      <li><b>守住已有资产：</b>产品口碑、复购 35% 的老客本身就来自运动健身人群，定位是"把既有优势喊出来"；</li>
+      <li><b>符合行业出口：</b>调研明确显示中小品牌只有垂直场景深耕能突围，运动健身正是极光运动的天然缝。</li>
+    </ul>
+    <h3>人群收敛的直接收益</h3>
+    <ul class="todo">
+      <li>投放聚焦运动人群包 → 精准度提升，ROI 有修复空间；</li>
+      <li>自然流量有抓手（运动数据教程、训练计划类内容种草）；</li>
+      <li>老客（复购 35%）可转化为转介绍裂变的种子。</li>
+    </ul>
+  </div>
+
+  <!-- 五、五行行动链 -->
+  <div class="section">
+    <h2><span class="no">伍</span>五行行动链 · 执行方案</h2>
+    <p class="lead">之金下刀 → 行水引水 → 有木植树 → 效火点火 → 归土归藏，按序推进。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="idx">金</div>
+        <div class="body"><b>之金下刀 · 止血（0-1 个月）</b><span>砍掉 ROI 低于阈值的投放渠道，把月营销费用占营收比从 60% 压到 40% 以内，优先保住 12 个月现金流安全线。</span></div>
+      </div>
+      <div class="step">
+        <div class="idx">水</div>
+        <div class="body"><b>行水引水 · 开源（1-3 个月）</b><span>建自然流量入口：运动数据教程/训练计划内容种草、老客转介绍机制（40% 老客是最好的种子）、运动社群运营。行业数据：垂直场景渠道（健身房合作）获客成本约为线上广告的 1/3；老客裂变可显著拉低获客成本。</span></div>
+      </div>
+      <div class="step">
+        <div class="idx">木</div>
+        <div class="body"><b>有木植树 · 固本（2-4 个月）</b><span>把复购 35%、老客 40% 的资产结构化：会员体系、训练计划订阅服务、数据增值服务，把老客变成复利引擎。</span></div>
+      </div>
+      <div class="step">
+        <div class="idx">火</div>
+        <div class="body"><b>效火点火 · 转化（2-4 个月）</b><span>人群聚焦运动包后，重做投放素材与落地页（强调"数据准、懂训练"），让 ROI 有修复空间。</span></div>
+      </div>
+      <div class="step">
+        <div class="idx">土</div>
+        <div class="body"><b>归土归藏 · 复盘（每月）</b><span>建立月度"获客结构"仪表盘，盯三个指标：自然流量占比从 8% → 20%、月营销费用占营收比 60% → 40%、ROI 月度环比。</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六、风险提示 -->
+  <div class="section">
+    <h2><span class="no">陆</span>风险提示</h2>
+    <div class="risk">
+      <ul>
+        <li><b>现金流优先：</b>融资已烧大半，任何增长动作的前提是先把营销费用占比压下来，否则优化未成、现金先断；</li>
+        <li><b>投放收缩期销量波动：</b>停投一周掉 70% 说明流量结构极度脆弱，止血要"分步砍、边砍边补开源"，避免硬着陆；</li>
+        <li><b>运动人群竞争：</b>Keep（内容侧）、佳明（专业侧）已在运动场景有布局，极光运动要用"轻智能 + 亲民价"错位切入，避免硬碰硬；</li>
+        <li><b>定位需要时间兑现：</b>心智占位和自然流量都是慢变量，3-6 个月内 ROI 改善幅度有限，需管理好股东预期。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 七、下一步 -->
+  <div class="section">
+    <h2><span class="no">柒</span>下一步执行清单</h2>
+    <ul class="todo">
+      <li><b>本周：</b>拉出全渠道 ROI 明细，定出首批砍掉的渠道清单；</li>
+      <li><b>本月：</b>完成定位收敛（"懂运动的轻智能手环"），同步改投放人群包与素材；</li>
+      <li><b>本月：</b>启动老客转介绍机制（首单老客带新返佣/积分）；</li>
+      <li><b>季度：</b>落地 1-2 个健身房/运动社区渠道合作，测试低成本获客；</li>
+      <li><b>月度：</b>上线"获客结构"仪表盘，自然流量占比目标 20%。</li>
+    </ul>
+  </div>
+
+  <footer>本报告由「择命行效 · 五行商业诊断」生成 · 出品：北京常识宋道商业咨询策划有限公司<br>理论体系：择命行效 —— 行之有效的五行商业诊断（因果 · 五行 · 度）</footer>
+</div>
+</body>
+</html>

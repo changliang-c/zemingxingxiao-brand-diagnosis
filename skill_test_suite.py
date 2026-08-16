@@ -554,6 +554,29 @@ def test_diagnostic_flow(suite):
         return True, "被质疑事实应对规则完整"
     suite.run_test("被质疑事实应对", t, "P1")
 
+    # 4.8e 入口token区间必填（v2.4.1 新增）
+    def t():
+        if "token" not in content.lower() or "必填" not in content:
+            return False, "缺少入口token区间必填项要求"
+        if "无区间的弹窗" not in content:
+            return False, "缺少'无区间的弹窗视为入口未完成'约束"
+        return True, "入口token区间必填项约束完整"
+    suite.run_test("入口token区间必填", t, "P1")
+
+    # 4.8f 竞品类信息禁问（v2.4.1 新增）
+    def t():
+        if "竞品类信息禁问" not in content:
+            return False, "缺少竞品类信息禁问硬约束"
+        return True, "竞品类信息禁问硬约束存在"
+    suite.run_test("竞品类信息禁问", t, "P1")
+
+    # 4.8g 报告模式流程闸门（v2.4.1 新增）
+    def t():
+        if "流程闸门" not in content:
+            return False, "缺少报告模式流程闸门"
+        return True, "报告模式流程闸门存在"
+    suite.run_test("报告模式流程闸门", t, "P1")
+
     # 4.9 内化原则
     def t():
         if "内化原则" not in content:
@@ -719,6 +742,26 @@ def test_output_spec(suite):
             return False, f"取数方法缺少: {missing}"
         return True, "数据取数引导完整（4种关键指标）"
     suite.run_test("数据取数引导", t, "P2")
+
+    # 5.10 格式自检闸门（v2.4.1 新增）
+    def t():
+        if "格式自检闸门" not in content:
+            return False, "缺少格式自检闸门"
+        if "退回重生成" not in content:
+            return False, "缺少'退回重生成'强制要求"
+        return True, "格式自检闸门完整（含退回重生成要求）"
+    suite.run_test("格式自检闸门", t, "P2")
+
+    # 5.11 report_template 强制规范（v2.4.1 新增）
+    def t():
+        if "report_template" not in content:
+            return False, "缺少 report_template 引用"
+        if "强制规范" not in content:
+            return False, "缺少'强制规范'措辞（仅写了'参照'）"
+        if "禁止自创" not in content:
+            return False, "缺少'禁止自创'约束"
+        return True, "report_template 强制规范约束完整"
+    suite.run_test("report_template强制规范", t, "P2")
 
 
 # ============================================================

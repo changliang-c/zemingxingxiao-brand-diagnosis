@@ -340,7 +340,7 @@ def test_theory_consistency(suite):
 
     # 2.8 断链定位规则完整
     def t():
-        chain_terms = ["金锈", "泵抽式", "塑料树", "野火", "佃农"]
+        chain_terms = ["金泄", "泵抽式", "塑料树", "野火", "佃农"]
         missing = [t for t in chain_terms if t not in content]
         if missing:
             return False, f"断链定位缺少术语: {missing}"

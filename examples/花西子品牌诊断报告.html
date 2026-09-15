@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【花西子】品牌诊断报告</title>
+<style>
+  /* === 全局 === */
+  body {
+    margin: 0; padding: 40px 20px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    color: #2c2c2c; line-height: 1.9; background: #fff;
+  }
+  /* === 水印：半透明"择命行效" === */
+  body::before {
+    content: "择命行效";
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 200px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.04);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 30px;
+  }
+  body::after {
+    content: "择命行效";
+    position: fixed; top: 15%; left: 8%;
+    transform: rotate(-30deg);
+    font-size: 150px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.03);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 20px;
+  }
+  .report { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .report-header { text-align: center; border-bottom: 3px solid #D4A017; padding-bottom: 24px; margin-bottom: 32px; }
+  .report-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; }
+  .report-subtitle { font-size: 14px; color: #666; line-height: 1.6; }
+  .report-subtitle .theory-name { font-weight: 600; color: #D4A017; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a1a; border-left: 4px solid #D4A017; padding-left: 12px; margin: 0 0 12px 0; }
+  .section-content { font-size: 15px; color: #333; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; margin: 0 4px; }
+  .status.sheng { background: #e8f5e9; color: #2e7d32; }
+  .status.xie { background: #fff3e0; color: #e65100; }
+  .status.hao { background: #ffebee; color: #c62828; }
+  .chart-container { margin: 16px 0; text-align: center; }
+  .chart-container svg { max-width: 100%; height: auto; }
+  .chart-caption { font-size: 13px; color: #888; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #e0e0e0; padding: 8px 12px; text-align: left; }
+  th { background: #fafafa; font-weight: 600; }
+  .footer-disclaimer { margin-top: 40px; padding: 20px; border-top: 2px solid #e0e0e0; font-size: 13px; color: #888; line-height: 1.8; }
+  .ele-jin { color: #D4A017; }
+  .ele-shui { color: #2196F3; }
+  .ele-mu { color: #4CAF50; }
+  .ele-huo { color: #F44336; }
+  .ele-tu { color: #795548; }
+  .note { font-size: 13px; color: #999; font-style: normal; }
+  @media print {
+    body { padding: 0; }
+    body::before, body::after { opacity: 0.06 !important; }
+    .report { max-width: none; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ====== 标题区 ====== -->
+  <div class="report-header">
+    <h1 class="report-title">【花西子】品牌诊断报告</h1>
+    <div class="report-subtitle">
+      理论依据：<span class="theory-name">择命行效-行之有效的五行商业诊断理论体系</span><br>
+      理论创立：常亮 ｜ 出品方：北京常识宋道商业咨询策划有限公司
+    </div>
+  </div>
+
+  <!-- ====== 〇 诊断摘要 ====== -->
+  <div class="section">
+    <h2 class="section-title">〇 诊断摘要</h2>
+    <div class="section-content">
+      <p><strong>入象：</strong>花西子，国货彩妆，定位「东方彩妆·以花养妆」，客单价约 150 元。曾靠超头主播李佳琦直播登顶国货彩妆第一（2020 年天猫 GMV 一度反超完美日记），2023 年「79 元眉笔」事件后增长停滞，2025 年已滑落至国货彩妆第三梯队——落后于毛戈平、卡姿兰，与彩棠同处 15 亿+ 规模区间。<span class="note">（数据来源：用户说 2025 年度主流电商彩妆榜单、胡润 2025 中国彩妆 TOP50，公开信息）</span></p>
+      <p><strong>断链环：</strong>主断点在木。花西子用「东方高端」的价格（金）切了市场，但产品力（木）始终是空的——SKU 不足完美日记三成、推新慢、销量 63% 压在散粉/眉笔/口红三款单品上、研发长期缺位（2022 年才引入李慧良补位）、全程代工无自有壁垒。木空一倒，金（定位独特性被国货集体「东方美」稀释）、水（泵抽式依赖超头主播）、火（野火，爆发不沉淀）、土（低复购佃农）四环连锁失衡。</p>
+      <p><strong>处方方向：</strong>从主断点木起顺行修复——先植树（建研发壁垒 + 聚焦常青单品 + 把「以花养妆」做成真实配方资产），再点火（用产品力自证，把野火换成灶火），后归土（沉淀复购盘），木有根后回头下刀（收缩定位）。</p>
+    </div>
+  </div>
+
+  <!-- ====== 一 之金·下刀诊 ====== -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-jin">一 之金·下刀诊</span>（定位取舍）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong>定位语「东方彩妆，以花养妆」，国风美学包装有辨识度。2018—2020 年「国潮+东方美学」确实是真切口，让花西子抢到了空位。但今天「东方之美」已成为国货彩妆的公共标签——珀莱雅、毛戈平、彩棠、花知晓都在打东方美学，空位被填满，花西子的切口从「独一份」变成了「大家都一样」。同时「不做什么」说不清：从底妆散粉到唇妆口红到眉妆到眼妆全品类铺开，刀口不集中。</p>
+      <p><strong>判定：</strong><span class="status xie">泄</span> 金泄（切口钝化）。三刀扫描：第一刀心智阶梯——彩妆品类整体第一格是 YSL（2025 年主流电商彩妆销售额第一，40 亿+），国货第一格已易主为毛戈平（胡润 2025 彩妆 TOP50 第一、「国货高端美妆第一股」）；花西子从 2020 年的国货第一滑到 2025 年的第三。第二刀空位探测——价格、人群、场景、成分维度均已被占，「东方美学」空位已满。第三刀对立面校验——国货老大毛戈平代表「专业、高端、大师 IP、光影技法」，花西子本想站「国风美学」的对立面，但这个对立面缺产品力托底，立不住。</p>
+      <p><strong>方：</strong>金不是主断点，但需后修——待木有根后再回头下刀：收缩定位，明确「花西子不做什么」，把「东方彩妆」从宽泛美学收窄到一个有产品力支撑的具体切口。</p>
+    </div>
+  </div>
+
+  <!-- ====== 二 行水·引水诊 ====== -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-shui">二 行水·引水诊</span>（流量渠道）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong>流量长期绑定李佳琦。2019 年 3 月首次进李佳琦直播间后销量爆发，2020 年 618、七夕、双十一三个周期贡献了约 70% 销量；李佳琦 1—7 月直播 118 场、花西子参与 45 场。自然流占比低，属典型的「主播泵抽式」引水——停投即涸。李佳琦翻车后，这条主水源受损，品牌遭「舆论连坐」。</p>
+      <p><strong>判定：</strong><span class="status hao">耗</span> 水耗（泵抽式引水·不及）。客户是一桶一桶挑来的，不是自己流来的。自然流占比估算不足 20%<span class="note">（花西子未上市，财务不公开，此为基于公开渠道结构推断，待数据验证）</span>。</p>
+      <p><strong>方：</strong>水不是主断点——木空才是根源，水只是被木空拖累的表象。修水须待木有根后，用产品口碑引流，把「挑水」换成「引水」。</p>
+    </div>
+  </div>
+
+  <!-- ====== 三 有木·植树诊 ====== -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-mu">三 有木·植树诊</span>（产品内容）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong>SKU 数量不足完美日记三成，推新速度慢；2020 年全年新品不到 10 款；销量高度集中——散粉、眉笔、口红三款单品占天猫销售额 63% 以上。研发长期缺位：2020 年全年专利规模与欧莱雅差距悬殊，直至 2022 年才引入原华熙生物首席科学家李慧良补研发。供应链全程代工，无自有工厂、无核心配方/成分专利壁垒。「以花养妆」更多停留在包装与文案，没有沉淀为真实的成分资产。</p>
+      <p><strong>判定：</strong><span class="status hao">耗</span> 木耗（塑料树·主断点）。产品无根——150 元客单价没有产品力托底，撑不起「值」字。「看复购周期，买一次就消失，木没扎根」：高客单+低频次，恰恰说明这棵树上没有能反复结果的枝。</p>
+      <p><strong>方：</strong>这是全链主断点，先修。①建研发：把「以花养妆」从营销概念变成可验证的成分/配方专利资产；②聚焦：砍掉跟风 SKU，集中资源把 1—2 款常青单品做深做穿（先让散粉/眉笔真正「值」它的价）；③控根：供应链从纯代工向自有/深度绑定过渡，握住品质的根。</p>
+    </div>
+  </div>
+
+  <!-- ====== 四 效火·点火诊 ====== -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-huo">四 效火·点火诊</span>（转化爆发）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong>爆发全靠李佳琦直播点火，2019 年销量同比暴增约 25 倍。但爆发没有沉淀——「79 元眉笔」事件里李佳琦一句「找找自己的原因」引爆全网，花西子遭「舆论连坐」，说明这把火烧的是主播的流量，不是品牌自己的资产。火一被抽走，品牌立即暴露在「卖得贵但凭什么贵」的质疑中。</p>
+      <p><strong>判定：</strong><span class="status xie">泄</span> 火泄（野火）。爆发后一地鸡毛——爆的是主播的势能，没爆出品牌自己的势能。火光没照亮产品，反而照出了定价与产品力的落差。</p>
+      <p><strong>方：</strong>火需后修。木有根后，造一个「产品力可验证」的事件——成分功效实证、第三方盲测、专业妆教内容，用产品力自己点火，把野火换成灶火。</p>
+    </div>
+  </div>
+
+  <!-- ====== 五 归土·归藏诊 ====== -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-tu">五 归土·归藏诊</span>（复购沉淀）</h2>
+    <div class="section-content">
+      <p><strong>现状：</strong>高客单（150 元）+ 低购买频次，复购天然偏弱。品牌有东方美学的视觉辨识度（这是它最像「土」的资产），但这份视觉资产没有转化为「搜花西子下单」的自然复购盘——自然流占比低、老客成交占比低，本质是在「租地」不是「买地」。</p>
+      <p><strong>判定：</strong><span class="status hao">耗</span> 土薄（佃农）。自然盘估算不足 20%<span class="note">（定性推断，待数据验证）</span>，停投即死。假土风险同时存在——把大促囤货、主播人情单误当复购，比没土更危险。</p>
+      <p><strong>方：</strong>土是木、火修好之后的收口动作。把东方美学视觉资产 + 产品功效口碑，沉淀为会员/私域/复购盘，把「租地」变「买地」。</p>
+    </div>
+  </div>
+
+  <!-- ====== 六 四象判定 ====== -->
+  <div class="section">
+    <h2 class="section-title">六 四象判定</h2>
+    <div class="section-content">
+      <p><strong>判定：<span style="background:#eeeeee;padding:2px 10px;border-radius:4px;font-weight:600;">老阴</span>（火水俱衰，靠惯性活着）。</strong></p>
+      <p><strong>依据：</strong>火（点火能力）——李佳琦事件后点火引擎受损，增长停滞，曾经的「火旺」已衰；水（引水能力）——从来不是自流，而是泵抽，泵（超头主播）也受损后水更滞。火水两气双双走弱，品牌靠「东方美学视觉 + 早期声量」的惯性维持 15 亿+ 规模，可榨取性正在耗尽。<span class="note">地形读数：收敛蛰伏期——各项读数趋稳，唯一正确的动作是归土重修，而非再点火。</span></p>
+      <p><strong>对照：</strong>毛戈平处少阳（专业 IP 带动自然流，增长健康，半年营收 25 亿、+31%）；完美日记处老阳（营销驱动烧钱换增长，上市后亏损）；钟薛高处老阴极端（火水俱衰且已基本出局）。花西子当前的老阴尚非终局，但若继续纵火而不修木，会滑向钟薛高式的极端老阴。</p>
+    </div>
+  </div>
+
+  <!-- ====== 七 修复顺序 ====== -->
+  <div class="section">
+    <h2 class="section-title">七 修复顺序</h2>
+    <div class="section-content">
+      <p>修复只能顺行（金→水→木→火→土），主断点在木，故从木修起：</p>
+      <p style="font-size:16px;font-weight:600;text-align:center;">
+        <span class="ele-mu">③ 修木（植树）</span> → <span class="ele-huo">④ 修火（点火）</span> → <span class="ele-tu">⑤ 归土（归藏）</span> → <span class="ele-jin">① 回头修金（下刀）</span>
+      </p>
+      <p><strong>第 1 步·修木：</strong>建研发壁垒 + 聚焦 1—2 款常青单品做深 + 供应链握根。这是主断点，是后面一切动作的前提——木不生根，修火修土都是空转。</p>
+      <p><strong>第 2 步·修火：</strong>产品力到位后，用「可验证的事件」（成分实证、第三方测评、妆教内容）自证，让产品自己说话，把野火换成灶火。</p>
+      <p><strong>第 3 步·归土：</strong>把产品口碑与东方美学视觉资产沉淀为会员/私域/复购盘，建「搜花西子下单」的自然盘。</p>
+      <p><strong>第 4 步·回头修金：</strong>木有根后重新下刀——收缩定位，明确「花西子不做什么」，把「东方彩妆」收窄到一个有产品力支撑的具体切口。</p>
+      <p class="note">敢说「不，先修你的木」——花西子最想做的可能是「再点火救销量」，但断环点火是五条里最贵的动作。处方不承诺「三个月必爆」，只承诺这条修复顺序。</p>
+    </div>
+  </div>
+
+  <!-- ====== 八 验收标准 ====== -->
+  <div class="section">
+    <h2 class="section-title">八 验收标准（90 天复检·土指标三件套）</h2>
+    <div class="section-content">
+      <p>咨询效果以「土变厚了没有」验收，不以 PPT 页数验收。90 天后只看三个土指标：</p>
+      <table>
+        <tr><th>指标</th><th>当前估算<span class="note">（定性推断，待数据验证）</span></th><th>90 天目标</th></tr>
+        <tr><td>复购率</td><td>偏低（高客单+低频次）</td><td><strong>≥ 25%</strong></td></tr>
+        <tr><td>自然流占比</td><td>&lt; 20%（泵抽式）</td><td><strong>≥ 40%</strong></td></tr>
+        <tr><td>老客成交占比</td><td>&lt; 20%（佃农）</td><td><strong>≥ 30%</strong></td></tr>
+      </table>
+      <p class="note">土厚了，再谈下一轮下刀——上一轮的土，就是下一轮的金。</p>
+    </div>
+  </div>
+
+  <!-- ====== 九 可视化图表 ====== -->
+  <div class="section">
+    <h2 class="section-title">九 可视化图表</h2>
+
+    <!-- ①五行链条诊断图 -->
+    <div class="chart-container">
+      <svg width="600" height="500" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+        <text x="300" y="30" text-anchor="middle" font-size="14" fill="#888">北京常识宋道·择命行效-行之有效的五行商业诊断理论体系·五行链条诊断图</text>
+        <!-- 连接线（相生顺序：金→水→木→火→土→金） -->
+        <g stroke="#bbb" stroke-width="2" fill="none">
+          <line x1="300" y1="90" x2="471" y2="214" />
+          <line x1="471" y1="214" x2="406" y2="416" />
+          <line x1="406" y1="416" x2="194" y2="416" />
+          <line x1="194" y1="416" x2="129" y2="214" />
+          <line x1="129" y1="214" x2="300" y2="90" />
+        </g>
+        <!-- 金（泄） -->
+        <circle cx="300" cy="90" r="42" fill="#D4A017" opacity="0.15" stroke="#D4A017" stroke-width="2.5"/>
+        <text x="300" y="82" text-anchor="middle" font-size="15" font-weight="700" fill="#D4A017">之金</text>
+        <text x="300" y="102" text-anchor="middle" font-size="13" fill="#e65100">泄</text>
+        <!-- 水（耗） -->
+        <circle cx="471" cy="214" r="42" fill="#2196F3" opacity="0.15" stroke="#2196F3" stroke-width="2.5"/>
+        <text x="471" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="#2196F3">行水</text>
+        <text x="471" y="226" text-anchor="middle" font-size="13" fill="#c62828">耗</text>
+        <!-- 木（耗·主断点） -->
+        <circle cx="406" cy="416" r="46" fill="#4CAF50" opacity="0.2" stroke="#c62828" stroke-width="4"/>
+        <text x="406" y="406" text-anchor="middle" font-size="15" font-weight="700" fill="#4CAF50">有木</text>
+        <text x="406" y="426" text-anchor="middle" font-size="13" font-weight="700" fill="#c62828">耗·主断点</text>
+        <!-- 火（泄） -->
+        <circle cx="194" cy="416" r="42" fill="#F44336" opacity="0.15" stroke="#F44336" stroke-width="2.5"/>
+        <text x="194" y="406" text-anchor="middle" font-size="15" font-weight="700" fill="#F44336">效火</text>
+        <text x="194" y="426" text-anchor="middle" font-size="13" fill="#e65100">泄</text>
+        <!-- 土（薄） -->
+        <circle cx="129" cy="214" r="42" fill="#795548" opacity="0.15" stroke="#795548" stroke-width="2.5"/>
+        <text x="129" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="#795548">归土</text>
+        <text x="129" y="226" text-anchor="middle" font-size="13" fill="#c62828">薄</text>
+        <!-- 中心 -->
+        <text x="300" y="275" text-anchor="middle" font-size="16" font-weight="700" fill="#333">花西子</text>
+        <text x="300" y="298" text-anchor="middle" font-size="12" fill="#999">四象：老阴 · 主断点：木</text>
+      </svg>
+      <div class="chart-caption">五行链条诊断图</div>
+    </div>
+
+    <!-- ②四象定位图 -->
+    <div class="chart-container">
+      <svg width="560" height="440" viewBox="0 0 560 440" xmlns="http://www.w3.org/2000/svg">
+        <text x="280" y="24" text-anchor="middle" font-size="14" fill="#888">北京常识宋道·择命行效-行之有效的五行商业诊断理论体系·四象定位图</text>
+        <!-- 坐标区 -->
+        <rect x="50" y="50" width="440" height="330" fill="#fff" stroke="#ccc"/>
+        <!-- 象限背景 -->
+        <rect x="270" y="50" width="220" height="165" fill="#FFF3E0" opacity="0.5"/><!-- 老阳 左上 -->
+        <rect x="270" y="215" width="220" height="165" fill="#E8F5E9" opacity="0.5"/><!-- 少阳 右上 -->
+        <rect x="50" y="50" width="220" height="165" fill="#EEEEEE" opacity="0.6"/><!-- 少阴/老阴 左下 -->
+        <rect x="50" y="215" width="220" height="165" fill="#EEEEEE" opacity="0.6"/><!-- 少阴/老阴 右下 -->
+        <!-- 中轴 -->
+        <line x1="270" y1="50" x2="270" y2="380" stroke="#ccc" stroke-dasharray="4"/>
+        <line x1="50" y1="215" x2="490" y2="215" stroke="#ccc" stroke-dasharray="4"/>
+        <!-- 象限标注 -->
+        <text x="270" y="110" text-anchor="middle" font-size="14" fill="#e65100" font-weight="700">老阳（火旺水滥）</text>
+        <text x="270" y="300" text-anchor="middle" font-size="14" fill="#2e7d32" font-weight="700">少阳（火生水蓄）</text>
+        <text x="160" y="110" text-anchor="middle" font-size="14" fill="#666" font-weight="700">少阴（火弱水滞）</text>
+        <text x="160" y="300" text-anchor="middle" font-size="14" fill="#555" font-weight="700">老阴（火水俱衰）</text>
+        <!-- 轴标签 -->
+        <text x="280" y="404" text-anchor="middle" font-size="13" fill="#333">X：引水能力（水）→</text>
+        <text x="24" y="215" text-anchor="middle" font-size="13" fill="#333" transform="rotate(-90 24 215)">Y：点火能力（火）→</text>
+        <!-- 案例点 -->
+        <g>
+          <circle cx="120" cy="320" r="9" fill="#F44336"/><text x="132" y="324" font-size="13" fill="#c62828" font-weight="700">花西子（老阴）</text>
+          <circle cx="80" cy="355" r="7" fill="#999"/><text x="92" y="359" font-size="12" fill="#666">钟薛高（老阴·极端）</text>
+          <circle cx="150" cy="105" r="8" fill="#FF9800"/><text x="162" y="109" font-size="12" fill="#e65100">完美日记（老阳）</text>
+          <circle cx="370" cy="130" r="8" fill="#4CAF50"/><text x="382" y="134" font-size="12" fill="#2e7d32">毛戈平（少阳）</text>
+        </g>
+        <text x="280" y="430" text-anchor="middle" font-size="11" fill="#aaa">虚线为中位线；花西子落于左下（火水俱衰），与钟薛高同象限，但未至极端</text>
+      </svg>
+      <div class="chart-caption">四象定位图</div>
+    </div>
+
+    <!-- ③断链与修复序列表 -->
+    <div class="chart-container">
+      <table>
+        <tr><th>五行</th><th>状态</th><th>断链点</th><th>修复优先级</th><th>预计周期</th></tr>
+        <tr><td><span class="ele-jin">金（定位下刀）</span></td><td>泄</td><td>切口钝化，「东方美」被稀释</td><td>第 4（木后回头）</td><td>6—12 个月</td></tr>
+        <tr><td><span class="ele-shui">水（流量引水）</span></td><td>耗</td><td>泵抽式依赖超头主播，自然流弱</td><td>第 3（随木火水到渠成）</td><td>3—6 个月</td></tr>
+        <tr><td><span class="ele-mu">木（产品植树）</span></td><td><strong>耗·主断点</strong></td><td>产品无根，定价缺产品力托底</td><td><strong>第 1（最先）</strong></td><td>6—12 个月</td></tr>
+        <tr><td><span class="ele-huo">火（转化点火）</span></td><td>泄</td><td>野火，爆发不沉淀</td><td>第 2</td><td>3—6 个月</td></tr>
+        <tr><td><span class="ele-tu">土（复购归藏）</span></td><td>薄</td><td>低复购佃农，自然盘弱</td><td>第 5（收口）</td><td>持续</td></tr>
+      </table>
+      <div class="chart-caption">断链与修复序列表</div>
+    </div>
+
+    <!-- ④治未病预警雷达图 -->
+    <div class="chart-container">
+      <svg width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+        <text x="210" y="22" text-anchor="middle" font-size="13" fill="#888">北京常识宋道·择命行效-行之有效的五行商业诊断理论体系·治未病预警雷达图</text>
+        <g transform="translate(210,220)">
+          <!-- 预警线（40）虚线圆 -->
+          <circle r="112" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"/>
+          <text x="118" y="6" font-size="11" fill="#e65100">预警线 40</text>
+          <!-- 网格圆 -->
+          <circle r="56" fill="none" stroke="#eee"/>
+          <circle r="140" fill="none" stroke="#eee"/>
+          <!-- 轴 -->
+          <g stroke="#ddd">
+            <line x1="0" y1="-140" x2="0" y2="140"/>
+            <line x1="133" y1="-43" x2="-133" y2="43"/>
+            <line x1="82" y1="113" x2="-82" y2="-113"/>
+            <line x1="-82" y1="113" x2="82" y2="-113"/>
+            <line x1="-133" y1="-43" x2="133" y2="43"/>
+          </g>
+          <!-- 读数多边形：金35 水20 木15 火25 土20（0-100 → 0-140） -->
+          <!-- 金(上)=35→49 ; 水(右上)=20→28 ; 木(右下)=15→21 ; 火(左下)=25→35 ; 土(左上)=20→28 -->
+          <polygon points="0,-49 26.6,-8.2 8.6,19.1 -13.8,32.2 -26.6,-8.2" fill="#4CAF50" fill-opacity="0.25" stroke="#4CAF50" stroke-width="2"/>
+          <!-- 顶点 -->
+          <circle cx="0" cy="-49" r="4" fill="#D4A017"/><text x="6" y="-54" font-size="12" fill="#D4A017" font-weight="700">金 35</text>
+          <circle cx="26.6" cy="-8.2" r="4" fill="#2196F3"/><text x="32" y="-6" font-size="12" fill="#2196F3">水 20</text>
+          <circle cx="8.6" cy="19.1" r="4" fill="#4CAF50"/><text x="14" y="28" font-size="12" fill="#4CAF50">木 15</text>
+          <circle cx="-13.8" cy="32.2" r="4" fill="#F44336"/><text x="-40" y="42" font-size="12" fill="#F44336">火 25</text>
+          <circle cx="-26.6" cy="-8.2" r="4" fill="#795548"/><text x="-58" y="-6" font-size="12" fill="#795548">土 20</text>
+        </g>
+        <text x="210" y="408" text-anchor="middle" font-size="11" fill="#aaa">读数 0—100（外圈=100），虚线为预警线；五维均低于 40，木（15）触底为主断点<span style="white-space:pre">  </span>（读数为定性推断，待数据验证）</text>
+      </svg>
+      <div class="chart-caption">治未病预警雷达图</div>
+    </div>
+
+  </div>
+
+  <!-- ====== 落款免责声明 ====== -->
+  <div class="footer-disclaimer">
+    <p><strong>免责声明</strong></p>
+    <p>本工具为开源协作版，供个人学习免费使用。商业使用（含企业内训、咨询交付、付费课程引用等），请咨询北京常识宋道商业咨询策划有限公司官方渠道。</p>
+    <p>理论体系著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。</p>
+    <p>本报告由 AI 基于「择命行效-行之有效的五行商业诊断理论体系」生成，诊断结论仅供参考，不构成投资或经营决策的唯一依据。花西子为非上市公司，内部经营数据（复购率、自然流占比、获客成本等）无法获取，相关读数为基于公开信息的定性推断，已逐处标注「待数据验证」。</p>
+    <p style="margin-top:10px;color:#aaa;">—— 是否允许将本次诊断的脱敏数据用于改进 skill？（是/否）</p>
+  </div>
+
+</div>
+</body>
+</html>

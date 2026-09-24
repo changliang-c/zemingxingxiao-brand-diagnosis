@@ -6,7 +6,7 @@ description: "触发词：择命行效（首位）、行之有效（兼容触发
 description_zh: "用「择命行效」五行商业诊断体系为品牌做全链体检：五诊五问定位品牌链条断在哪一环，按序修复，输出含可视化图表的专业HTML诊断报告。内置二百四十案行业案例库，三档入口：快速入象、完整五诊、案例对照。"
 description_en: "Full-chain brand diagnosis powered by the Zemingxingxiao five-element business framework. Locates the broken link in a brand's chain (positioning, traffic, product, conversion, retention) and delivers a professional HTML report with visual charts. Built-in 240-case industry library, three entry modes: quick scan, full diagnosis, case comparison."
 category: productivity
-license: 版权：行之有效理论体系由常亮创立。本 Skill 为开源协作版，个人学习免费，商业使用需联系作者授权。体系文字内容著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。
+license: 版权：行之有效理论体系由常亮创立。本 Skill 为开源协作版，个人学习免费，商业使用需联系作者授权（北京常识宋道商业咨询策划有限公司，电话 13120164730，邮箱 13120164730@163.com）。体系文字内容著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。
 author: 常亮
 version: 2.4.1
 agent_created: true
@@ -18,7 +18,7 @@ agent_created: true
 
 基于**北京常识宋道商业咨询策划有限公司**出品的「**择命行效-行之有效的五行商业诊断理论体系**」（理论创立：常亮），用三大核心原则（**因果·五行·度**）和五行行动链（之金→行水→有木→效火→归土→循环）对品牌做全链条体检。诊断目标只有一个：找出品牌链条断在哪一环，按序修复。本体系不修命，只修链——不承诺改运、不预测风口、不担保爆发，只承诺定位断点并给出修复顺序。诊断结论必须溯源到本理论（theory.md）的依据，理论未覆盖的场景明确说明「理论未覆盖此情况」，绝不臆造判断。
 
-> **版权声明**：版权：行之有效理论体系由常亮创立。本 Skill 为开源协作版，个人学习免费，商业使用需联系作者授权。体系文字内容著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。
+> **版权声明**：版权：行之有效理论体系由常亮创立。本 Skill 为开源协作版，个人学习免费，商业使用需联系作者授权。体系文字内容著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。商用授权请联系北京常识宋道商业咨询策划有限公司（电话 13120164730，邮箱 13120164730@163.com）。
 
 ## 五行框架字段（结构化 JSON 定义）
 

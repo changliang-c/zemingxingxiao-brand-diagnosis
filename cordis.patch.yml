@@ -1,0 +1,5 @@
+# 择命行效·品牌诊断 —— DeepSeek Harness bundle 装配层
+# 安装后本 patch 自动把插件挂进 Cordis 插件树，无需再手动改 profile 配置。
+- insert:
+    - id: zemingxingxiao-brand-diagnosis
+      name: dsh-skill-zemingxingxiao-brand-diagnosis

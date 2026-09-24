@@ -164,7 +164,7 @@ skill 触发后的第一件事：向用户弹出模式选择，用编号选项�
 
 ## 报告格式（强制·HTML输出）
 
-**档二·完整五诊的正式诊断报告，必须以 HTML 格式输出（不再使用 ASCII 框线或纯 Markdown）。** 输出 `.html` 文件后，用平台提供的文件/预览展示能力呈现（WorkBuddy 中为 `present_files`，自动打开预览面板，用户可在浏览器中"打印为PDF"，水印保留）；若平台不支持文件输出，则把完整 HTML 代码附在回复中并说明可保存为 .html 打开。
+**档二·完整五诊的正式诊断报告，必须以 HTML 格式输出（不再使用 ASCII 框线或纯 Markdown）。** 输出 `.html` 文件后交付给用户（WorkBuddy 中为 `present_files` 自动打开预览面板；DeepSeek Harness（dsh）等环境中写出文件到工作区并告知路径，用户可在浏览器中打开并"打印为PDF"，水印保留）；若平台不支持文件输出，则把完整 HTML 代码附在回复中并说明可保存为 .html 打开。
 
 ### HTML 报告结构要求
 
@@ -495,6 +495,8 @@ AI 在报告中使用以下方式生成可视化：
 
 ## 知识库引用
 
+文件路径形态（WorkBuddy / Kimi 等按文件加载 skill 的平台）：
+
 - references/theory.md — 理论框架全文（三大核心原则：因果·五行·度 / 五行链 / 三铁律 / 三才定位 / 四象 / 度专题 / 鞍点同构论证 / 三块天花板 / 边界与戒律）。理解理论背景或回应用户对理论本身的提问时加载。
 - references/cases.md — 二百四十案案例库（卷一十案经典卷 + 卷二·三十案首创型企业专卷 + 卷三百案生命周期与治未病专卷 + 卷四百案续卷特殊样本与理论压力测试）。做案例对照或需要案例佐证时加载。
 - references/diagnosis.md — 诊断操作手册（五诊五问详细话术 / 四象处方句式 / 报告模板 / 验收标准 / 治未病体检单）。执行完整五诊或生成报告时加载。
@@ -503,3 +505,13 @@ AI 在报告中使用以下方式生成可视化：
 - assets/ — 13 张理论体系配图（因果两极五行输运图、五行行动链循环图、五行相生相克双环图、鞍点地形图、四象地形状态图、五诊五问流程图、三才定位结构图、度·因果秤杆图、五行过与不及图、SWOT对比五行图、行业五行定位图、苹果五行链图等）。报告中引用时使用。
 - evals/ — 测试套件（trigger-tests.md 触发测试集 / rubric.md 质量评分表 / case-zhongxuegao.md 回归基准案例）。改版后必跑。
 - test_framework.md — 测试体系深度参考文档（5层测试体系设计、23个Fixture、pass@k方案、模型对比矩阵模板）。日常测试用 evals/ 目录即用文件，此文档为设计背景与方法论参考。
+
+伴随技能形态（DeepSeek Harness / dsh 插件形态，用 skill 工具按 name 加载，按需取用，不要一次全部加载）：
+
+- `zemingxingxiao-theory` — 对应 references/theory.md
+- `zemingxingxiao-diagnosis` — 对应 references/diagnosis.md
+- `zemingxingxiao-cases` — 对应 references/cases.md
+- `zemingxingxiao-visual-templates` — 对应 references/visual_templates.md
+- `zemingxingxiao-glossary` — 对应 references/api_reference.md
+
+dsh 形态下的本机资源路径（由 dsh 插件在注册时注入到主技能内容末尾的「运行时资源路径」一节，均为真实存在的文件）：references/report_template.html（强制报告模板）、assets/（13 张配图）、examples/（花西子、钟薛高两份完整示例报告）。

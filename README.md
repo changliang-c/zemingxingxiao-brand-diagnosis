@@ -97,3 +97,36 @@ python skill_test_suite.py
 
 - 理论创立：常亮
 - 出品方：北京常识宋道商业咨询策划有限公司
+
+
+---
+
+## DeepSeek Harness 插件（dsh plugin）
+
+本仓库同时是一个可安装的 DeepSeek Harness bundle 插件：`package.json` 声明了 `dsh.bundle`（patch 指向根目录 `cordis.patch.yml`），可被 `dsh plugin add` 直接安装。
+
+安装：
+
+```bash
+dsh plugin --profile web add github:changliang-c/zemingxingxiao-brand-diagnosis
+```
+
+重启 `dsh web` 后生效。验证挂载：
+
+```bash
+dsh --profile web --dump-config | grep zemingxingxiao
+```
+
+装上后插件做三件事：
+
+1. 注册主技能 `zemingxingxiao-brand-diagnosis`（本文件 = 完整诊断方法论）；
+2. 注册 5 个伴随参考技能，模型用 `skill` 工具按需加载：`zemingxingxiao-theory`（理论）、`zemingxingxiao-diagnosis`（诊断手册）、`zemingxingxiao-cases`（二百四十案案例库）、`zemingxingxiao-visual-templates`（可视化模板）、`zemingxingxiao-glossary`（术语表）；
+3. 注入 systemPrompt 路由提示：用户提到品牌诊断/体检/断链分析/定位诊断等意图时主动加载主技能。
+
+报告模板（`references/report_template.html`）与 13 张配图（`assets/`）路径在技能加载时注入为本机绝对路径。插件零运行时依赖（不 import 任何 `@deepseek-ai/*`），卸载自动撤销全部注册。
+
+冒烟测试（无需安装 dsh，mock ctx 直接验证注册行为）：
+
+```bash
+npm test
+```

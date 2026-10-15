@@ -616,14 +616,16 @@ def test_diagnostic_flow(suite):
         return True, "诊断五阶段完整"
     suite.run_test("诊断五阶段完整", t, "P1")
 
-    # 4.13 处方顺行规则
+    # 4.13 处方排序规则（口径统一版：检查有顺序，施工无固定顺序）
     def t():
-        if "顺行" not in content:
-            return False, "缺少处方顺行规则"
-        if "严禁乱序" not in content:
-            return False, "缺少'严禁乱序'约束"
-        return True, "处方顺行规则存在"
-    suite.run_test("处方顺行规则", t, "P1")
+        if "检查有顺序" not in content:
+            return False, "缺少「检查有顺序」表述"
+        if "无固定顺序" not in content:
+            return False, "缺少「施工无固定顺序」表述"
+        if "严禁乱序" in content and "顺行" in content:
+            return False, "仍残留旧口径（顺行/严禁乱序）"
+        return True, "处方排序规则为新口径（按损失风险/证据/依赖排优先级）"
+    suite.run_test("处方排序规则", t, "P1")
 
     # 4.14 执业约束（四边界+五戒）
     def t():
@@ -707,7 +709,7 @@ def test_output_spec(suite):
         if "自检清单" not in content:
             return False, "缺少自检清单"
         checks = ["品牌名", "理论体系标注", "入象", "断链", "开方", "取数方法",
-                  "现代白话", "90天复检", "可视化", "SVG", "HTML格式", "顺行"]
+                  "现代白话", "90天复检", "可视化", "SVG", "HTML格式", "排序依据"]
         missing = [c for c in checks if c not in content]
         if len(missing) > 2:
             return False, f"自检清单缺少多项: {missing}"

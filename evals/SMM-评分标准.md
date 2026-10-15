@@ -40,9 +40,9 @@
 
 | 分值 | 标准 |
 |------|------|
-| 20 | 原创概念（五行/三刀/度/鞍点/四象/行动链等）全部有 references/theory.md 释义可回溯；五行顺行（金→水→木→火→土）经案例验证无逆序；自检清单含「不编造概念」约束；references/ 目录完整（theory/diagnosis/cases/api_reference/report_template/visual_templates 齐全） |
+| 20 | 原创概念（五行/三刀/度/鞍点/四象/行动链等）全部有 references/theory.md 释义可回溯；五环检查顺序（金→水→木→火→土）与动作排序原则（按损失风险/证据/依赖排优先级，施工无固定顺序）表述一致无矛盾；自检清单含「不编造概念」约束；references/ 目录完整（theory/diagnosis/cases/api_reference/report_template/visual_templates 齐全） |
 | 15–19 | 理论框架完整，1处小瑕疵（如某概念释义不够清晰、某案例与理论有小出入） |
-| 10–14 | 有理论框架但部分概念无释义、或顺行有误未修正 |
+| 10–14 | 有理论框架但部分概念无释义、或排序口径有误未修正 |
 | 5–9 | 理论框架零散，多处概念无据可查 |
 | 0–4 | 无理论体系，纯指令堆砌 |
 

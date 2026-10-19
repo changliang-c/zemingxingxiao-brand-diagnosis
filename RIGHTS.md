@@ -1,13 +1,17 @@
-# 权利与署名 / Rights and attribution
+# 权利边界 / Rights boundaries
 
-本项目当前发布内容适用 [择命行效免费商用许可 1.0](LICENSE)。代码、技能文本、原创表达、模板和原创配图允许免费使用、复制、修改、分发及商用；无需另行申请商用授权。符合许可的正常商用不收许可费，不事后追讨收益。分发时保留署名、版权和许可声明，实质性改编应注明。
+本仓库当前版本中的代码、技能文本、提示词、文档、模板和随附原创素材依 [MIT License](LICENSE) 发布。MIT 允许使用、复制、修改、合并、发布、分发、再许可和销售，只要求在副本或实质性部分中保留版权及许可声明。无需另行申请商用授权，也不对许可范围内的正常商用追收费用或收益。
 
-理论创立：常亮。运营方：北京常识宋道商业咨询策划有限公司。推荐署名为“择命行效 · 常亮 / Zemingxingxiao · Chang Liang”，并链接 [项目](https://github.com/changliang-c/zemingxingxiao-brand-diagnosis) 和 [许可](https://github.com/changliang-c/zemingxingxiao-brand-diagnosis/blob/main/LICENSE)。
+版权所有：常亮（Chang Liang）。运营方：北京常识宋道商业咨询策划有限公司。引用时可使用“择命行效 · 常亮 / Zemingxingxiao · Chang Liang”并链接[项目](https://github.com/changliang-c/zemingxingxiao-brand-diagnosis)；这是推荐引用方式，不增加 MIT 之外的授权条件。
 
-本许可不转让商标、名称及标识权，不含冒用身份或暗示官方背书；不把一般思想、方法或公有知识宣称为排他权。第三方商标、图片、引文等仍依其原有权利处理。
+“择命行效”、公司名称、Logo及其他来源标识不是软件代码。MIT 不授予商标权，也不表示作者或运营方对修改版、衍生产品或第三方服务作出认可。可以为说明来源而合理使用名称，但第三方版本应清楚区分自身身份。
 
-公开案例库是基于公开信息的教学推演，包含作者命题样本，不等同于已验证的真实客户案例。新回传研究数据默认仅供内部分析，不自动成为公开案例或宣传素材，不因代码开放而获得分发权。
+内部研究回传记录、用户原始资料、个人信息、私有回执、访问令牌和研究数据库不是本仓库发布内容，不随代码获得 MIT 授权。公开案例库包含基于公开信息的教学推演和作者命题样本，不等同于已验证的真实客户案例；案例事实本身也不因收入仓库而成为作者的专有财产。
 
-历史 ZIP、回归记录和旧报告保留为版本证据，其中旧版许可说明已由本许可对当前发布版本替代；旧包不作为 2.5.0 安装入口。当前发布包只含维护中的技能资源与明确标注的合成样例，不包含本地待补交数据、回执、令牌或内部研究库。
+第三方商标、图片、字体、引文和其他材料仍受各自权利与许可约束。MIT 只适用于版权人有权许可的内容。一般思想、方法和公有知识不因本项目的原创表达而成为排他权利。
 
-The current release is available under the [Zemingxingxiao Free Commercial Use License 1.0](LICENSE). Use, copying, modification, redistribution and commercial use are permitted without license fees. Retain attribution, copyright and license notices, and identify substantial modifications. Ordinary commercial proceeds from compliant use are not subject to retroactive claims. Trademark and name rights remain with their owners; this license grants no impersonation or official endorsement. Internal research submissions are not public assets and are excluded from redistribution.
+2.5.1 是首个以 MIT 作为主许可证的发布版本。历史 ZIP 和回归记录保留其发布时的许可证，作为版本证据，不是当前安装入口。
+
+The current repository release—including its code, skill text, prompts, documentation, templates and included original assets—is licensed under the [MIT License](LICENSE). The recommended attribution is “Zemingxingxiao · Chang Liang,” but it does not add conditions beyond MIT.
+
+Names, company identifiers and logos are not software code. MIT grants no trademark rights and implies no endorsement of modified versions or third-party services. Internal research submissions, user source materials, personal data, private receipts, access tokens and research databases are not distributed under MIT. Third-party materials remain subject to their respective rights and licenses.

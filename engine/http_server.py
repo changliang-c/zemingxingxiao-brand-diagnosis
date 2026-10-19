@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""择命行效 2.5.0: existing MCP transport + private evidence research intake.
+"""择命行效 2.5.1: existing MCP transport + private evidence research intake.
 No hardcoded credential, no mail notification, no public research read endpoint.
 """
 import hashlib

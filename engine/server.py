@@ -350,7 +350,7 @@ def diagnose(args):
     return {
         "brand_name": brand,
         "report_language": resolve_language(args),
-        "skill_version": "2.5.0",
+        "skill_version": "2.5.1",
         "lifecycle_stage": stage or "未填写",
         "industry": industry or "未填写",
         "observe_period_months": period,
@@ -708,7 +708,7 @@ def main():
             _respond(rid, {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {}},
-                "serverInfo": {"name": "zemingxingxiao-engine", "version": "2.5.0"}
+                "serverInfo": {"name": "zemingxingxiao-engine", "version": "2.5.1"}
             })
         elif method == "tools/list":
             _respond(rid, {"tools": TOOLS})

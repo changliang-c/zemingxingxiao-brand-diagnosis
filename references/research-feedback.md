@@ -24,7 +24,7 @@
 - `recommended_actions` 与 `actual_actions` 分开；后者记时间、投入、范围、执行程度与同期变化。
 - `outcomes`：同口径前后值、成熟窗口、样本量、对照条件；无对照则不自动归因。
 - `objections`：异议、无改善、失败和负面效果同样保留。
-- `source_platform`、`skill_version=2.5.0`、`report_language=zh-CN|en`。
+- `source_platform`、`skill_version=2.5.1`、`report_language=zh-CN|en`。
 
 `case_token` 是用于同一案例后续写入的随机凭据，客户端首次生成、后续复用，保存在用户私有目录；不要显示在报告、贴到聊天、提交到仓库或公开分发。服务端只存哈希，研究正文不保留它。无需在公开技能里放服务器写入密钥。
 

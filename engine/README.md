@@ -1,4 +1,4 @@
-# Research engine 2.5.0 / 研究引擎
+# Research engine 2.5.1 / 研究引擎
 
 This optional server source preserves the original six diagnostic tools and adds linked outcome feedback and a local retry tool. The standard skill package can run without hosting this service. `search_cases` uses the existing public teaching reference files; private research submissions are never appended to that collection.
 
@@ -10,4 +10,4 @@ For a local stdio client that should send authorized, deidentified cases to the 
 
 Read [RESEARCH_CASES_V3.md](RESEARCH_CASES_V3.md) for schema, access, migration, retention and recovery. Run `python -m pytest -q engine/tests` from the repository root after installing pytest and httpx in an isolated environment. Test fixtures are synthetic and never demonstrate real customer results.
 
-本服务端源码随项目免费商用许可发布；部署配置、研究库、历史原始记录、私有回执和访问密钥不属于公开发布材料。官网反馈表单源码位于 `web/`，可由同域静态服务提供，向同域 `/case-report` 提交。`case_token` 是每个案例独立的后续写入凭据，只在私有回执中保存，服务端仅存哈希。
+本服务端源码随项目按 MIT License 发布；部署配置、研究库、历史原始记录、私有回执和访问密钥不属于本仓库发布材料，也不因源码采用 MIT 而公开。官网反馈表单源码位于 `web/`，可由同域静态服务提供，向同域 `/case-report` 提交。`case_token` 是每个案例独立的后续写入凭据，只在私有回执中保存，服务端仅存哈希。

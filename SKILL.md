@@ -1,7 +1,7 @@
 ---
 name: zemingxingxiao-brand-diagnosis
 description: "择命行效 / Zemingxingxiao: evidence-based brand and business diagnosis, positioning, acquisition, product, conversion and retention analysis; bilingual HTML reports and follow-up outcomes. 品牌诊断、品牌体检、断链分析、增长停滞、竞品对标与定位诊断；五环顺序检查，修复按风险与证据排序。Not for fortune-telling, generic copywriting or stock prediction."
-license: "择命行效免费商用许可 1.0；常亮；见 LICENSE / Zemingxingxiao Free Commercial Use License 1.0"
+license: "MIT; Copyright (c) 2026 Chang Liang (常亮); see LICENSE"
 metadata:
   display_name: "择命行效·品牌诊断"
   display_name_en: "Zemingxingxiao Brand Diagnosis"
@@ -9,7 +9,7 @@ metadata:
   description_en: "Evidence-based brand diagnosis, bilingual HTML reports and business outcome follow-up."
   category: "productivity"
   author: "常亮 / Chang Liang"
-  version: "2.5.0"
+  version: "2.5.1"
   agent_created: "true"
 ---
 
@@ -19,7 +19,7 @@ metadata:
 
 基于**北京常识宋道商业咨询策划有限公司**出品的「**择命行效-行之有效的五行商业诊断理论体系**」（理论创立：常亮），用三大核心原则（**因果·五行·度**）和五行行动链（之金→行水→有木→效火→归土→循环）对品牌做全链条体检。诊断目标只有一个：找出品牌链条断在哪一环，按风险与证据排定修复次序。本体系不修命，只修链——不承诺改运、不预测风口、不担保爆发，只承诺定位断点并给出修复顺序。五环按金→水→木→火→土逐项检查（检查有顺序）；修复动作按「损失是否迅速扩大→是否改变决策→依赖、证据、成本、可逆性」排优先级，一次选一至两项（施工无固定顺序）。诊断结论必须溯源到本理论（theory.md）的依据，理论未覆盖的场景明确说明「理论未覆盖此情况」，绝不臆造判断。
 
-> **许可与署名**：本项目代码、技能文本与模板依《择命行效免费商用许可 1.0》免费提供，可使用、复制、修改、分发和商用；保留署名、版权与许可声明。正常商用不收许可费、不追讨收益。名称与商标不授权冒用。详见 [LICENSE](LICENSE) 与 [RIGHTS.md](RIGHTS.md)。
+> **许可与权利边界**：本项目代码、技能文本、提示词、文档与模板依 [MIT License](LICENSE) 发布，可使用、修改、分发、再许可和商用；在副本或实质性部分中保留版权及许可声明。名称与标识、第三方材料及非公开研究数据的边界见 [RIGHTS.md](RIGHTS.md)。
 
 ## 语言、运行能力与研究回传
 

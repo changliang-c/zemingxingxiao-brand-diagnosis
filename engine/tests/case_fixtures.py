@@ -17,7 +17,7 @@ def initial_case():
     result = {
         "schema_version": "3.0", "record_type": "diagnosis", "case_id": "synthetic_case_20261019_0001",
         "submission_id": "synthetic_initial_20261019_0001", "case_token": "SYNTHETIC_ONLY_never_production_0123456789012345",
-        "version": 1, "source_platform": "local-isolated-test", "skill_version": "2.5.0", "report_language": "zh-CN",
+        "version": 1, "source_platform": "local-isolated-test", "skill_version": "2.5.1", "report_language": "zh-CN",
         "authorization": {"status": "authorized", "purpose": "internal_research", "basis": "全量虚构数据，专用于本地验收。"},
         "deidentification": {"reviewed": True, "identity_terms": ["虚构示例餐厅", "示例负责人"], "residual_risk": "low"},
         "context": {"industry": "餐饮", "business_model": "门店即时消费", "stage": "稳定经营",

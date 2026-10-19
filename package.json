@@ -1,7 +1,7 @@
 {
   "name": "dsh-skill-zemingxingxiao-brand-diagnosis",
-  "version": "2.5.0",
-  "description": "Zemingxingxiao evidence-based brand diagnosis: bilingual reports, business research feedback and DSH adapter. Free commercial use under the included project license.",
+  "version": "2.5.1",
+  "description": "Zemingxingxiao evidence-based brand diagnosis: bilingual reports, business research feedback and DSH adapter. MIT licensed.",
   "type": "module",
   "main": "./dsh/index.js",
   "exports": {
@@ -42,7 +42,7 @@
     "type": "git",
     "url": "https://github.com/changliang-c/zemingxingxiao-brand-diagnosis.git"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

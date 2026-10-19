@@ -157,10 +157,8 @@ def test_structural(suite):
         if not lic_match:
             return False, "缺少 license 字段"
         lic = lic_match.group(1).strip()
-        if len(lic) < 20:
-            return False, f"license 过短 ({len(lic)} 字符)，可能缺少版权说明"
-        if "常亮" not in lic:
-            return False, "license 未提及理论创立人'常亮'"
+        if "MIT" not in lic or "常亮" not in lic:
+            return False, "license 字段必须标明 MIT 与版权所有人常亮"
         return True, f"license 字段完整 ({len(lic)} 字符)"
     suite.run_test("license 版权字段", t, "P0")
 
@@ -912,15 +910,20 @@ def test_documentation(suite):
             return False, "缺少版权声明"
         if "常亮" not in content:
             return False, "版权声明未提及理论创立人"
-        if "免费商用许可 1.0" not in content:
-            return False, "缺少当前免费商用许可声明"
+        license_text = (SKILL_DIR / "LICENSE").read_text(encoding="utf-8")
+        if "MIT License" not in license_text or "Permission is hereby granted" not in license_text:
+            return False, "缺少标准 MIT License 正文"
         current_files = ["SKILL.md", "README.md", "README.zh-CN.md", "LICENSE", "RIGHTS.md", "references/report_template.html", "references/report_template.en.html"]
         obsolete = ["商业使用需联系作者授权", "不授予转售、再分发与商业使用权利", "授权联系方式（申请商用授权）"]
         for name in current_files:
             text = (SKILL_DIR / name).read_text(encoding="utf-8")
             if any(term in text for term in obsolete):
                 return False, f"{name} 仍有旧商业限制"
-        return True, "当前发布文件免费商用许可一致"
+        for name in current_files:
+            text = (SKILL_DIR / name).read_text(encoding="utf-8")
+            if "择命行效免费商用许可 1.0" in text or "Zemingxingxiao Free Commercial Use License" in text:
+                return False, f"{name} 仍引用旧自定义许可证"
+        return True, "当前发布文件 MIT 许可一致"
     suite.run_test("版权声明", t, "P3")
 
     # 7.2 author 字段

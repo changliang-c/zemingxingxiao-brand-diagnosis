@@ -1,4 +1,4 @@
-"""Isolated v2.5.0 regression tests: no production requests or notifications."""
+"""Isolated v2.5.1 regression tests: no production requests or notifications."""
 import copy
 import json
 import os
@@ -47,12 +47,12 @@ class EngineReportsTests(unittest.TestCase):
             self.assertTrue(Path(r["report_file"]).is_file())
             self.assertEqual(r["report_url"],"")
             if language=="en":
-                for label in ("Business Diagnosis Report","Diagnostic summary","Repair priorities","Verification and conclusion","Outcome feedback","Free Commercial Use License"):
+                for label in ("Business Diagnosis Report","Diagnostic summary","Repair priorities","Verification and conclusion","Outcome feedback","MIT License"):
                     self.assertIn(label,r["html"])
                 self.assertNotIn("品牌诊断报告",r["html"])
             else:
                 self.assertIn("修复无固定顺序",r["html"])
-                self.assertIn("免费商用许可",r["html"])
+                self.assertIn("MIT License",r["html"])
         conversation=server.generate_report({"diagnosis":self.diagnosis,"conversation_language":"en"})
         self.assertEqual(conversation["report_language"],"en")
         self.assertIn("markdown",conversation)
@@ -202,7 +202,7 @@ class EngineReportsTests(unittest.TestCase):
         messages=[{"jsonrpc":"2.0","id":1,"method":"initialize"},{"jsonrpc":"2.0","id":2,"method":"tools/list"}]
         result=subprocess.run([sys.executable,str(BASE/'server.py')],input='\n'.join(json.dumps(x) for x in messages)+'\n',text=True,capture_output=True,encoding='utf-8',check=True)
         lines=[json.loads(line) for line in result.stdout.splitlines()]
-        self.assertEqual(lines[0]['result']['serverInfo']['version'],'2.5.0')
+        self.assertEqual(lines[0]['result']['serverInfo']['version'],'2.5.1')
         self.assertEqual(len(lines[1]['result']['tools']),8)
 
 

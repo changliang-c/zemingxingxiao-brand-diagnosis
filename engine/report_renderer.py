@@ -1,4 +1,4 @@
-"""Bilingual reports; the diagnostic rules remain in server.py (v2.5.0)."""
+"""Bilingual reports; the diagnostic rules remain in server.py (v2.5.1)."""
 import html
 import json
 import math
@@ -7,7 +7,7 @@ import re
 import uuid
 from pathlib import Path
 
-VERSION = "2.5.0"
+VERSION = "2.5.1"
 ORDER = ["金", "水", "木", "火", "土"]
 COLORS = ["#ad8846", "#246b67", "#47694d", "#a94f36", "#766758"]
 ELEMENTS_EN = {"金": "Metal · positioning", "水": "Water · acquisition", "木": "Wood · product assets", "火": "Fire · conversion", "土": "Earth · retention"}
@@ -30,8 +30,8 @@ ZH_INTERPRETATION = {
  "土": {"生":"已有主动回来的客户基本盘；请以一致口径核验复购及自然成交。", "泄":"留存客户盘偏弱或依赖外部渠道。区分真实复购、一次性订单和渠道压量。", "中":"已有沉淀，但深度有限。", "待验证":"复购、老客成交和自然成交数据尚需测量。"}
 }
 ZH_CONFIG = {"老阳":"获客快速增长且集中动作较强，需要检查留存；不能单凭声量推定形成了长期资产。", "少阳":"集中动作较强、获客增幅相对较低，应检验现有模式能否在不削弱留存的前提下放大。", "少阴":"集中动作较弱且获客未净减少，宜加密观察；依赖条件具备时再做可验证的集中动作试验。", "老阴":"此配置下获客正在减少。扩大推广前，应先检查老客流失和定位依据。", "无象":"渠道尚未建立，先收集获客证据再定象。", "待判定":"缺少必要获客增长或集中动作证据，四象暂不判定。"}
-LICENSE_ZH = "本项目代码、技能文本与模板依《择命行效免费商用许可 1.0》免费提供，可使用、复制、修改、分发和商用；保留原有署名、版权与许可声明。已依许可开展的正常商用不收许可费、不追讨收益。商标、名称及标识归属不变，许可不含冒用或暗示背书。理论说明不主张对一般思想、方法或公有知识的排他权。"
-LICENSE_EN = "Project code, skill text and templates are provided free of charge under the Zemingxingxiao Free Commercial Use License 1.0 for use, copying, modification, distribution and commercial use. Retain existing attribution, copyright and license notices. Compliant ordinary commercial use incurs no license fee or claim to its proceeds. Ownership of trademarks, names and logos is unchanged; impersonation or implied endorsement is not permitted. The theory description claims no exclusive rights over general ideas, methods or public knowledge."
+LICENSE_ZH = "本项目代码、技能文本、提示词、文档与模板依 MIT License 发布，可使用、修改、分发、再许可和商用；在副本或实质性部分中保留版权及许可声明。名称、标识、第三方材料与非公开研究数据不随软件授权。"
+LICENSE_EN = "Project code, skill text, prompts, documentation and templates are released under the MIT License. Use, modification, distribution, sublicensing and commercial use are permitted; retain the copyright and permission notices in copies or substantial portions. Names, marks, third-party materials and non-public research data are outside the software license."
 
 def resolve_language(args, diagnosis=None):
     """Explicit report language > conversation language > Simplified Chinese."""
@@ -131,7 +131,7 @@ def generate_report(args, base_dir, interpretations, neutral, element_names):
     charts={k:_svg(k,fe,xiang,en) for k in ("chain","xiang","radar")}
     chart_html="".join(f'<figure>{svg}</figure>' for svg in charts.values())
     section_html="".join('<section><h2>'+_e(h)+'</h2>'+''.join('<p>'+_e(p)+'</p>' for p in ps)+('<ul>'+''.join('<li>'+_e(b)+'</li>' for b in bs)+'</ul>' if bs else '')+'</section>' for h,ps,bs in sections)
-    report=f'''<!doctype html><html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{_e(brand)} · {title}</title><style>body{{margin:0;background:#eae6dc;color:#292d2b;font:16px/1.8 system-ui,sans-serif}}main{{max-width:960px;margin:32px auto;padding:48px;background:#faf7ef}}h1,h2{{color:#245a50}}h1{{font-size:32px}}h2{{font-size:22px;border-left:4px solid #a94f36;padding-left:14px}}section{{margin:34px 0}}figure{{margin:22px 0}}svg{{width:100%;height:auto}}footer{{border-top:1px solid #b7ac95;margin-top:36px;font-size:12px;color:#5e645e}}.kicker{{letter-spacing:2px;color:#8c713d}}@media print{{body{{background:white}}main{{margin:0;padding:15px;max-width:none}}section,figure{{break-inside:avoid}}}}</style></head><body><main><div class="kicker">ZEMINGXINGXIAO · 2.5.0</div><h1>{_e(brand)} · {title}</h1><p>{_e(industry)}</p>{chart_html}{section_html}<footer><p>{_e(disclaimer)}</p><p>{_e(license_text)}</p></footer></main></body></html>'''
+    report=f'''<!doctype html><html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{_e(brand)} · {title}</title><style>body{{margin:0;background:#eae6dc;color:#292d2b;font:16px/1.8 system-ui,sans-serif}}main{{max-width:960px;margin:32px auto;padding:48px;background:#faf7ef}}h1,h2{{color:#245a50}}h1{{font-size:32px}}h2{{font-size:22px;border-left:4px solid #a94f36;padding-left:14px}}section{{margin:34px 0}}figure{{margin:22px 0}}svg{{width:100%;height:auto}}footer{{border-top:1px solid #b7ac95;margin-top:36px;font-size:12px;color:#5e645e}}.kicker{{letter-spacing:2px;color:#8c713d}}@media print{{body{{background:white}}main{{margin:0;padding:15px;max-width:none}}section,figure{{break-inside:avoid}}}}</style></head><body><main><div class="kicker">ZEMINGXINGXIAO · {VERSION}</div><h1>{_e(brand)} · {title}</h1><p>{_e(industry)}</p>{chart_html}{section_html}<footer><p>{_e(disclaimer)}</p><p>{_e(license_text)}</p></footer></main></body></html>'''
     report_url=""; report_file=""; chart_refs=[]; artifact_error=""
     try:
         directory=Path(os.environ.get("ZMXX_REPORT_DIR") or Path(base_dir)/"static")

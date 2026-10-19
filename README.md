@@ -4,7 +4,7 @@ English · [简体中文](README.zh-CN.md)
 
 Zemingxingxiao (择命行效) diagnoses business and brand problems across positioning, acquisition, product, conversion and retention. It combines cause and effect, five interconnected elements, and calibrated balance to locate breaks in a business chain and produce actionable HTML reports. Theory created by **Chang Liang (常亮)**; operated by **北京常识宋道商业咨询策划有限公司**.
 
-**Skill release: 2.5.0** · [Website](https://www.zmxx.work/) · [Public teaching cases](https://www.zmxx.work/cases) · [Downloads](https://www.zmxx.work/#download)
+**Skill release: 2.5.1** · [Website](https://www.zmxx.work/) · [Public teaching cases](https://www.zmxx.work/cases) · [Downloads](https://www.zmxx.work/#download)
 
 Inspect Metal → Water → Wood → Fire → Earth in order to avoid omissions. Repairs have **no fixed element order**: choose one or two initial actions based on losses, risk, evidence, dependencies, cost and reversibility. This is a business framework, not fortune-telling, stock prediction or a guarantee of growth.
 
@@ -32,9 +32,9 @@ The client prepares a deidentified local copy, sends it and records a real recei
 
 After delivery, the assistant actively invites an outcome update: action and date; cost and execution level; comparable before/after metrics and mature windows; concurrent changes; failure, harm or disagreement. Follow-up records link to the original diagnosis. See the [complete workflow](references/research-feedback.md) and [schema](references/case-schema-v3.json). Synthetic examples demonstrate the structure; they are not customer success evidence.
 
-## Free commercial use
+## MIT License
 
-Code, skill text and templates are available under the [Zemingxingxiao Free Commercial Use License 1.0](LICENSE): use, copy, modify, redistribute and commercial use are permitted without license fees, provided attribution, copyright and license notices are retained. No retroactive fees or claims to ordinary commercial proceeds apply to permitted use. Trademark and name rights remain with their owners; no impersonation or endorsement is granted. The theory statement does not claim exclusive rights over general ideas, methods or public knowledge. See [RIGHTS.md](RIGHTS.md).
+Code, skill text, prompts, documentation and templates are released under the standard [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense and sell the Software, including commercially, provided the copyright and permission notices are retained in copies or substantial portions. Names, marks, third-party materials and non-public research data are outside the software license; see [RIGHTS.md](RIGHTS.md).
 
 ## DeepSeek Harness
 

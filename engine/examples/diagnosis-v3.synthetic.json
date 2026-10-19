@@ -1,0 +1,189 @@
+{
+  "schema_version": "3.0",
+  "record_type": "diagnosis",
+  "case_id": "synthetic_case_20261019_0001",
+  "submission_id": "synthetic_initial_20261019_0001",
+  "case_token": "SYNTHETIC_ONLY_never_production_0123456789012345",
+  "version": 1,
+  "source_platform": "local-isolated-test",
+  "skill_version": "2.5.0",
+  "report_language": "zh-CN",
+  "authorization": {
+    "status": "authorized",
+    "purpose": "internal_research",
+    "basis": "全量虚构数据，专用于本地验收。"
+  },
+  "deidentification": {
+    "reviewed": true,
+    "identity_terms": [
+      "虚构示例餐厅",
+      "示例负责人"
+    ],
+    "residual_risk": "low"
+  },
+  "context": {
+    "industry": "餐饮",
+    "business_model": "门店即时消费",
+    "stage": "稳定经营",
+    "scale_band": "单店、月订单约10000",
+    "customer_segment": "附近工作与生活客群",
+    "purchase_scenario": "工作日午餐",
+    "channels": [
+      "门店自然客流",
+      "付费本地推广"
+    ],
+    "goal": "在不降低毛利率的情况下改善成熟新客群复购",
+    "constraints": [
+      "预算3000元",
+      "不扩大人员编制"
+    ]
+  },
+  "observations": [
+    {
+      "observation_id": "repeat-baseline",
+      "metric": "30天新客复购率",
+      "value": 0.12,
+      "unit": "ratio",
+      "numerator": 120,
+      "denominator": 1000,
+      "period": {
+        "start": "2026-06-01",
+        "end": "2026-06-30",
+        "window_days": 30,
+        "matured": true
+      },
+      "definition": "复购人数/首次消费后满30天的新客人数；每人最多计一次，不含未成熟窗口。",
+      "source": "合成验收数据，不是真实客户",
+      "evidence_type": "measured",
+      "population": "完成30天观察的新客1000人；不上传客户明细",
+      "missing": []
+    },
+    {
+      "observation_id": "ticket-baseline",
+      "metric": "客单价",
+      "value": 35.000075,
+      "unit": "CNY/order",
+      "numerator": 350000.75,
+      "denominator": 10000,
+      "period": {
+        "start": "2026-06-01",
+        "end": "2026-06-30",
+        "window_days": 30,
+        "matured": true
+      },
+      "definition": "6月已完成且扣除退款的订单收入350000.75元 / 10000笔订单；精确比值35.000075，面向展示可约为35元。",
+      "source": "合成验收数据，不是真实客户",
+      "evidence_type": "measured",
+      "population": "6月全部10000笔已完成订单",
+      "missing": []
+    },
+    {
+      "observation_id": "cac-baseline",
+      "metric": "付费获客成本",
+      "value": 20,
+      "unit": "CNY/customer",
+      "numerator": 20000,
+      "denominator": 1000,
+      "period": {
+        "start": "2026-06-01",
+        "end": "2026-06-30",
+        "window_days": 30,
+        "matured": true
+      },
+      "definition": "6月付费渠道费用20000元 / 该渠道首次完成消费的新客1000人；不含自然到店新客。",
+      "source": "合成验收数据，不是真实客户",
+      "evidence_type": "measured",
+      "population": "6月付费渠道获客1000人；与复购成熟队列不默认同一人群",
+      "missing": []
+    },
+    {
+      "observation_id": "revenue-baseline",
+      "metric": "月营收",
+      "value": 350000.75,
+      "unit": "CNY",
+      "numerator": null,
+      "denominator": null,
+      "period": {
+        "start": "2026-06-01",
+        "end": "2026-06-30",
+        "window_days": 30,
+        "matured": true
+      },
+      "definition": "6月已完成订单的实收收入，扣除退款；金额350000.75元，未扣成本和获客费用。",
+      "source": "合成验收数据，不是真实客户",
+      "evidence_type": "measured",
+      "population": "6月全部已完成订单的企业聚合收入",
+      "missing": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-retention",
+      "statement": "首次消费后缺少再次到店承接；虚构示例餐厅由示例负责人提供汇总说明。",
+      "evidence_type": "user_reported",
+      "source": "合成访谈摘录",
+      "observation_refs": [
+        "repeat-baseline"
+      ],
+      "limitations": [
+        "无顾客级数据，暂不能分离餐品偏好与回访机制影响"
+      ]
+    }
+  ],
+  "diagnosis": {
+    "primary_break": "土：留存承接不足",
+    "secondary_breaks": [
+      "水：付费获客成本需追踪"
+    ],
+    "reasoning": "复购120/1000且离店后缺少再次到店机制，优先试验低成本承接动作。检查有顺序，修复无固定顺序。",
+    "supporting_evidence": [
+      "ev-retention"
+    ],
+    "counter_evidence": [
+      "已有自然回头客，不能推断完全没有留存"
+    ],
+    "alternative_explanations": [
+      "菜品匹配",
+      "服务体验",
+      "季节与节假日"
+    ],
+    "confidence": 0.65,
+    "missing_evidence": [
+      "同口径未接受动作的对照群体"
+    ],
+    "theory_version": "2.1"
+  },
+  "predictions": [
+    {
+      "prediction_id": "pred-repeat",
+      "action_ids": [
+        "return-visit"
+      ],
+      "metric": "30天新客复购率",
+      "baseline_observation_id": "repeat-baseline",
+      "expected_change": "成熟新客群复购率从12%向17%改善；属于可检验预期而非保证。",
+      "deadline": "2026-08-31",
+      "falsification": "执行充分且观察窗口成熟后仍≤12%，应否定或调整留存承接是主断点的判断。"
+    }
+  ],
+  "recommended_actions": [
+    {
+      "action_id": "return-visit",
+      "description": "首次用餐离店时提供下次到店承接，并在有授权的自有渠道提醒。",
+      "status": "planned",
+      "start_date": "2026-07-01",
+      "end_date": "2026-08-31",
+      "investment": 3000,
+      "investment_unit": "CNY",
+      "scope": "同一门店的1000名新客聚合群体",
+      "execution_extent": "计划覆盖100%收银班次",
+      "concurrent_changes": [],
+      "evidence_refs": [
+        "ev-retention"
+      ]
+    }
+  ],
+  "actual_actions": [],
+  "outcomes": [],
+  "objections": []
+}

@@ -1,0 +1,878 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "diagnosis",
+        "follow_up"
+      ]
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{16,128}$"
+    },
+    "submission_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{16,128}$"
+    },
+    "case_token": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{32,256}$",
+      "writeOnly": true
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "parent_submission_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{16,128}$"
+    },
+    "source_platform": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "skill_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "report_language": {
+      "type": "string",
+      "enum": [
+        "zh-CN",
+        "en"
+      ]
+    },
+    "authorization": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "authorized",
+            "not_authorized",
+            "confidential",
+            "unknown"
+          ]
+        },
+        "purpose": {
+          "const": "internal_research"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "status",
+        "purpose",
+        "basis"
+      ],
+      "additionalProperties": false
+    },
+    "deidentification": {
+      "type": "object",
+      "properties": {
+        "reviewed": {
+          "type": "boolean"
+        },
+        "identity_terms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "residual_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "unresolved"
+          ]
+        }
+      },
+      "required": [
+        "reviewed",
+        "residual_risk"
+      ],
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "industry": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "business_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "scale_band": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "customer_segment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "purchase_scenario": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "industry",
+        "business_model",
+        "stage",
+        "scale_band",
+        "customer_segment",
+        "purchase_scenario",
+        "channels",
+        "goal",
+        "constraints"
+      ],
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "observation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "metric": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "numerator": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "denominator": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "period": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+              },
+              "end": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+              },
+              "window_days": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "matured": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "window_days",
+              "matured"
+            ],
+            "additionalProperties": false
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "user_reported",
+              "estimate",
+              "model_inference"
+            ]
+          },
+          "population": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "missing": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "observation_id",
+          "metric",
+          "value",
+          "unit",
+          "numerator",
+          "denominator",
+          "period",
+          "definition",
+          "source",
+          "evidence_type",
+          "population",
+          "missing"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 200
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "user_reported",
+              "estimate",
+              "model_inference"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "observation_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "maxItems": 200
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "evidence_id",
+          "statement",
+          "evidence_type",
+          "source",
+          "observation_refs",
+          "limitations"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 200
+    },
+    "diagnosis": {
+      "type": "object",
+      "properties": {
+        "primary_break": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "secondary_breaks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "reasoning": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "supporting_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "alternative_explanations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "missing_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "maxItems": 200
+        },
+        "theory_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "primary_break",
+        "secondary_breaks",
+        "reasoning",
+        "supporting_evidence",
+        "counter_evidence",
+        "alternative_explanations",
+        "confidence",
+        "missing_evidence",
+        "theory_version"
+      ],
+      "additionalProperties": false
+    },
+    "predictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prediction_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "action_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "maxItems": 200
+          },
+          "metric": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "baseline_observation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected_change": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "deadline": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "falsification": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          }
+        },
+        "required": [
+          "prediction_id",
+          "action_ids",
+          "metric",
+          "baseline_observation_id",
+          "expected_change",
+          "deadline",
+          "falsification"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 200
+    },
+    "recommended_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "not_started",
+              "in_progress",
+              "completed",
+              "stopped"
+            ]
+          },
+          "start_date": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 10
+          },
+          "end_date": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 10
+          },
+          "investment": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "investment_unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "execution_extent": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "concurrent_changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "action_id",
+          "description",
+          "status",
+          "start_date",
+          "end_date",
+          "investment",
+          "investment_unit",
+          "scope",
+          "execution_extent",
+          "concurrent_changes",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 200
+    },
+    "actual_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "not_started",
+              "in_progress",
+              "completed",
+              "stopped"
+            ]
+          },
+          "start_date": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 10
+          },
+          "end_date": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 10
+          },
+          "investment": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "investment_unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "execution_extent": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "concurrent_changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "action_id",
+          "description",
+          "status",
+          "start_date",
+          "end_date",
+          "investment",
+          "investment_unit",
+          "scope",
+          "execution_extent",
+          "concurrent_changes",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 200
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "observation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "baseline_observation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "improved",
+              "no_change",
+              "worsened",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "sample_size": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "observation_window": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "control": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "confounders": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          },
+          "attribution": {
+            "type": "string",
+            "enum": [
+              "unestablished",
+              "supported",
+              "contradicted"
+            ]
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "adverse_effects": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "observation_id",
+          "baseline_observation_id",
+          "result",
+          "sample_size",
+          "observation_window",
+          "control",
+          "confounders",
+          "attribution",
+          "interpretation",
+          "adverse_effects"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 200
+    },
+    "objections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 12000
+      },
+      "minItems": 0,
+      "maxItems": 200
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "case_id",
+    "submission_id",
+    "case_token",
+    "version",
+    "source_platform",
+    "skill_version",
+    "report_language",
+    "authorization",
+    "deidentification",
+    "context",
+    "observations",
+    "evidence",
+    "diagnosis",
+    "predictions",
+    "recommended_actions",
+    "actual_actions",
+    "outcomes",
+    "objections"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "择命行效 private research case v3",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "follow_up"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "parent_submission_id"
+        ],
+        "properties": {
+          "actual_actions": {
+            "minItems": 1
+          },
+          "outcomes": {
+            "minItems": 1
+          },
+          "version": {
+            "minimum": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "diagnosis"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "recommended_actions": {
+            "minItems": 1
+          },
+          "predictions": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

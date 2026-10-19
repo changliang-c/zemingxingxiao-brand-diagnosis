@@ -1,7 +1,7 @@
 {
   "name": "dsh-skill-zemingxingxiao-brand-diagnosis",
-  "version": "0.1.0",
-  "description": "Zemingxingxiao five-element brand diagnosis skill bundle for DeepSeek Harness: registers the diagnosis skill, five companion reference skills (theory, diagnosis playbook, 240-case library, visual templates, glossary) and a system-prompt router, and ships the mandatory HTML report template plus 13 theory diagrams.",
+  "version": "2.5.0",
+  "description": "Zemingxingxiao evidence-based brand diagnosis: bilingual reports, business research feedback and DSH adapter. Free commercial use under the included project license.",
   "type": "module",
   "main": "./dsh/index.js",
   "exports": {
@@ -13,10 +13,14 @@
     "SKILL.md",
     "references",
     "assets",
-    "examples",
     "cordis.patch.yml",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "README.zh-CN.md",
+    "RIGHTS.md",
+    "scripts",
+    "examples/*.html",
+    "examples/*.synthetic.json"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0"

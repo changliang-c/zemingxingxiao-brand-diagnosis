@@ -34,13 +34,13 @@ function stripFrontmatter(markdown) {
 const MAIN_SKILL = 'zemingxingxiao-brand-diagnosis'
 
 const MAIN_DESCRIPTION =
-  '择命行效·品牌五行诊断（常亮创立）。用因果·五行·度三原则和五行行动链（之金下刀→行水引水→有木植树→效火点火→归土归藏）' +
-  '对品牌做全链体检：五诊五问定位品牌链条断在哪一环，按金→水→木→火→土顺序开修复处方，' +
+  'Zemingxingxiao: evidence-based brand diagnosis and bilingual HTML reports. 择命行效·品牌五行诊断（常亮创立）。用因果·五行·度三原则和五行行动链（之金下刀→行水引水→有木植树→效火点火→归土归藏）' +
+  '对品牌做全链体检：五诊五问定位品牌链条断在哪一环，按金→水→木→火→土顺序检查；修复无固定顺序，按损失、风险、证据、依赖、成本和可逆性选一至两项，' +
   '输出含 SVG 可视化与水印的 HTML 诊断报告。问金环节含心智阶梯三刀（心智占位扫描→空位探测→对立面校验）。' +
   '内置二百四十案行业案例库，三档入口：快速入象、完整五诊、案例对照。'
 
 const MAIN_WHEN_TO_USE =
-  '品牌诊断、品牌体检、断链分析、增长停滞诊断、竞品对标诊断、定位诊断、心智定位、营销方案/策划、' +
+  'Brand diagnosis, business diagnosis, positioning, growth bottlenecks, retention; 品牌诊断、品牌体检、断链分析、增长停滞诊断、竞品对标诊断、定位诊断、心智定位、营销方案/策划、' +
   '品牌分析报告、商业计划类问诊，或用户点名「择命行效/行之有效/五行诊断」时。' +
   '不要用于：写 slogan 或广告文案、纯数据分析、代码编写、中医/算命的五行、与品牌经营无关的话题。'
 
@@ -87,6 +87,8 @@ function runtimeBlock() {
     '本技能由 dsh 插件 `dsh-skill-zemingxingxiao-brand-diagnosis` 注册，以下路径在本机真实存在，可直接读取：',
     '',
     `- HTML 报告骨架模板（强制规范，生成报告必须严格按此结构填充）：\`${p('references/report_template.html')}\``,
+    `- English report template: \`${p('references/report_template.en.html')}\``,
+    `- 经营反馈规范：\`${p('references/research-feedback.md')}\`；发送脚本：\`${p('scripts/submit_case.py')}\``,
     `- 理论配图目录（13 张 PNG，文件名见上文「理论配图模板」表）：\`${p('assets')}/\``,
     `- 完整示例报告两份（输出报告前可先读作样板）：\`${p('examples/花西子品牌诊断报告.html')}\`、\`${p('examples/钟薛高品牌诊断报告.html')}\``,
     '',
@@ -101,7 +103,7 @@ function runtimeBlock() {
 }
 
 const ROUTER_PROMPT =
-  '择命行效插件已安装：当用户提出品牌诊断/品牌体检/断链分析/增长停滞/定位诊断/心智定位/营销方案/品牌分析报告等需求，' +
+  'Zemingxingxiao is available for brand diagnosis and positioning requests in English or Chinese. Report language follows explicit user choice, then conversation, default zh-CN. 择命行效插件已安装：当用户提出品牌诊断/品牌体检/断链分析/增长停滞/定位诊断/心智定位/营销方案/品牌分析报告等需求，' +
   '或点名「择命行效」「行之有效」「五行诊断」时，先调用 skill 工具加载技能 `zemingxingxiao-brand-diagnosis` 并遵循其流程执行；' +
   '理论依据、诊断话术、案例库与报告模板分别按需加载伴随技能（zemingxingxiao-theory / -diagnosis / -cases / -visual-templates / -glossary）。'
 

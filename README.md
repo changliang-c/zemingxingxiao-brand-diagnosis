@@ -1,152 +1,58 @@
-# 择命行效-行之有效的五行商业诊断理论体系
+# Zemingxingxiao — evidence-based brand diagnosis
 
-## 简介
+English · [简体中文](README.zh-CN.md)
 
-品牌营销诊断与咨询报告生成器。基于**北京常识宋道商业咨询策划有限公司**出品的「**择命行效-行之有效的五行商业诊断理论体系**」（理论创立：常亮），用三大核心原则（因果·五行·度）和五行行动链（之金→行水→有木→效火→归土→循环）对品牌做全链条体检，定位断链环，输出含可视化图表的HTML诊断报告。
+Zemingxingxiao (择命行效) diagnoses business and brand problems across positioning, acquisition, product, conversion and retention. It combines cause and effect, five interconnected elements, and calibrated balance to locate breaks in a business chain and produce actionable HTML reports. Theory created by **Chang Liang (常亮)**; operated by **北京常识宋道商业咨询策划有限公司**.
 
-问金环节含三刀定位法（心智阶梯扫描→空位探测→对立面校验）。提供三档入口：快速入象、完整五诊、案例对照。内置二百四十案行业案例库。
+**Skill release: 2.5.0** · [Website](https://www.zmxx.work/) · [Public teaching cases](https://www.zmxx.work/cases) · [Downloads](https://www.zmxx.work/#download)
 
-**官方入口**：官网 https://zmxx.work ｜ 二百四十案案例库 https://zmxx.work/cases ｜ 工具下载 https://zmxx.work/#download
+Inspect Metal → Water → Wood → Fire → Earth in order to avoid omissions. Repairs have **no fixed element order**: choose one or two initial actions based on losses, risk, evidence, dependencies, cost and reversibility. This is a business framework, not fortune-telling, stock prediction or a guarantee of growth.
 
-**版本口径**：理论体系 v2.1 ｜ 诊断插件 v2.4.4 ｜ 适配稿引擎 v3.0
+## Start a diagnosis
 
-## 版权与授权
+Install `zemingxingxiao-brand-diagnosis/` in your host's supported skills location, or import the versioned ZIP if the platform accepts Agent Skills packages. The ZIP's internal folder remains stable across releases. `SKILL.md` uses standard frontmatter and string-valued metadata; file-based and DSH adapters remain available.
 
-**行之有效理论体系由常亮创立，体系文字内容著作权归常亮所有，授权北京常识宋道商业咨询策划有限公司运营。** 已完成著作权登记（登记号 国作登字-2026-A-00235817）。 本仓库为开源协作版：提供源码供个人学习与协作改进；不授予转售、再分发与商业使用权利。商业授权请联系北京常识宋道商业咨询策划有限公司。
+Ask “Diagnose my brand's retention problem” or “择命行效，帮我做品牌体检”. The assistant offers Chat and Full Report modes, collects business facts in short rounds, and produces evidence, uncertainties, repair priorities and measurable follow-up criteria. A project alias is sufficient; a real brand name is not required.
 
-### 防抄袭与使用边界
+**Report language:** your explicit choice wins; otherwise the current conversation language applies; if unclear, the default is Simplified Chinese. An English discovery description does not force Chinese conversations into English. Both templates share the same theory and diagnosis rules. See [language and terminology](references/language.md).
 
-- 公开仓库不等于开源：提供源代码与文字内容，不等于按 OSI 定义授予开源许可，也不新增转售、分发、再许可权利（详见 RIGHTS.md）。
-- **禁止**未经授权将本仓库内容（含 SKILL.md、references、案例文本、报告模板）整体或部分搬运、转载、改编至其他仓库、平台、课程、出版物或付费社群。
-- **禁止**将本体系改名、换皮后作为自有方法论交付或售卖；引用须署名「择命行效 · 常亮」并链接本仓库。
-- 案例库中的企业诊断基于公开信息，为教学推演样本；抄袭案例文本用于商业交付的，著作权与名誉权风险自负。
-- 发现侵权行为，将通过平台投诉、律师函及诉讼等途径依法维权；已登记著作权，维权有据。
+## Business research and follow-up
 
-- 电话：13120164730
-- 邮箱：13120164730@163.com
+Retain substantive evidence: context, metric values and units, numerators and denominators, observation windows, sources, reasoning and counterevidence, proposed and actual actions, results, failures and disagreement. Aggregate revenue, costs, margin, orders and retention figures are not categorically excluded. Direct identifiers and identifying combinations are removed **before transmission**.
 
-## 适用场景
+Submissions are for internal research. They are not automatically published, added to the public teaching library or exposed to other users. Existing valid authorization is reused without repeated prompts; free commercial use alone does not authorize third-party confidential or identifying material.
 
-- 品牌诊断 / 品牌体检
-- 断链分析
-- 增长停滞诊断
-- 竞品对标诊断
-- 定位诊断 / 心智定位
+A Python-enabled host can submit a reviewed case using:
 
-## 不适用场景
-
-- 写 slogan 或广告文案
-- 纯数据分析
-- 代码编写
-- 中医 / 算命的五行
-- 与品牌经营无关的话题
-
-## 快速上手
-
-1. 在 WorkBuddy 对话中输入触发词（如"择命行效"或"品牌诊断"）
-2. AI 先报 token 消耗区间，确认后进入信息收集
-3. 第一轮只问必填 3 项（品牌名+品类/生命周期/痛点）
-4. 必填答完后补充选填 5 项（营收/渠道/复购/营销/竞品）
-5. 信息充足后 AI 输出 HTML 诊断报告（含水印+SVG 可视化+落款）
-
-## 目录结构
-
-```
-zemingxingxiao-brand-diagnosis/
-├── SKILL.md                # 核心 skill 文件（frontmatter + 指令）
-├── README.md               # 本文件
-├── LICENSE                 # 版权声明
-├── .gitignore              # Git 忽略规则
-├── skill_test_suite.py     # 77 项静态自动化测试
-├── test_framework.md       # 5 层测试体系深度参考文档
-├── evals/                  # 测试用例目录
-│   ├── trigger-tests.md        # 25 个触发测试（10 显式+10 隐式+5 负面）
-│   ├── rubric.md               # 10 项质量评分表（5 个 ★ 一票否决）
-│   └── case-zhongxuegao.md     # 钟薛高回归基准案例
-├── references/             # 参考文档目录
-│   ├── theory.md               # 理论原文
-│   ├── diagnosis.md            # 诊断流程（含问金三刀）
-│   ├── cases.md                # 行业案例库（二百四十案）
-│   ├── api_reference.md        # 术语速查
-│   ├── visual_templates.md    # 可视化模板
-│   └── report_template.html    # HTML 报告模板
-├── assets/                 # 配图资源（13 张）
-└── examples/               # 示例输出
-    └── 钟薛高品牌诊断报告.html  # 完整示例报告
+```text
+python scripts/submit_case.py --input /private/path/case.json
 ```
 
-## 版本历史
+The client prepares a deidentified local copy, sends it and records a real receipt. Network failures leave a private outbox file for retry and do not prevent report delivery. A prompt-only host must state that submission is pending until acknowledged. Per-case follow-up credentials stay in the private outbox, never in reports or public packages.
 
-| 版本 | 日期 | 主要变更 |
-|------|------|---------|
-| v2.4.4 | 2026-10-15 | 口径统一改造：五环检查保留金→水→木→火→土顺序；修复动作改为按「损失是否迅速扩大→是否改变决策→依赖、证据、成本、可逆性」排优先级，一次一至两项，施工无固定顺序；新增「问局·定局面」四问（五诊之前）；评分标准、测试断言、模板、案例库、示例报告同步新口径；收录案二百四十一/二百四十二（作者命题推演样本） |
-| v2.3.7 | 2026-08-15 | P1+P2 修复：description 收紧、断链表格式统一 HTML、钟薛高顺行修复、present_files 条件化、GBK 编码修复、.gitignore、agent_created |
-| v2.3.6 | 2026-08-15 | 收紧 description、自检闸门升级、新建 evals/ 目录 |
-| v2.3.5 | 2026-08-15 | 分步硬约束+交互格式+token 区间 |
-| v2.3.4 | 2026-08-15 | HTML 化+回传极简+信息分层 |
-| v2.3.3 | 2026-08-15 | 报告格式标准化 |
-| v2.3.2 | 2026-08-15 | 内化原则 |
-| v2.3.1 | 2026-08-15 | 逐刀推进硬约束 |
-| v2.3 | 2026-08-15 | 框架字段+触发词置顶 |
-| v2.2 | 2026-08-13 | 问金三刀升级+全量统一命名 |
+After delivery, the assistant actively invites an outcome update: action and date; cost and execution level; comparable before/after metrics and mature windows; concurrent changes; failure, harm or disagreement. Follow-up records link to the original diagnosis. See the [complete workflow](references/research-feedback.md) and [schema](references/case-schema-v3.json). Synthetic examples demonstrate the structure; they are not customer success evidence.
 
-## 测试
+## Free commercial use
 
-### 静态测试（L1）
+Code, skill text and templates are available under the [Zemingxingxiao Free Commercial Use License 1.0](LICENSE): use, copy, modify, redistribute and commercial use are permitted without license fees, provided attribution, copyright and license notices are retained. No retroactive fees or claims to ordinary commercial proceeds apply to permitted use. Trademark and name rights remain with their owners; no impersonation or endorsement is granted. The theory statement does not claim exclusive rights over general ideas, methods or public knowledge. See [RIGHTS.md](RIGHTS.md).
 
-```bash
-python skill_test_suite.py
-```
+## DeepSeek Harness
 
-77 项自动化测试，覆盖：结构完整性、理论框架一致性、触发规则与边界、诊断流程完整性、输出规范、引用文件质量、文档合规。
+The repository remains a DSH bundle with no runtime package dependencies:
 
-### 行为测试（L2-L5）
-
-详见 `test_framework.md` 和 `evals/` 目录。核心流程：
-
-1. 按 `evals/trigger-tests.md` 的 25 个输入在 WorkBuddy 里切模型跑
-2. 按 `evals/rubric.md` 的 10 项标准打分
-3. 用 `evals/case-zhongxuegao.md` 做回归基准
-4. 改版后重跑，分数不降即为通过
-
-## 版权
-
-详见 [LICENSE](LICENSE)
-
-## 联系方式
-
-- 理论创立：常亮
-- 出品方：北京常识宋道商业咨询策划有限公司
-
-
----
-
-## DeepSeek Harness 插件（dsh plugin）
-
-本仓库同时是一个可安装的 DeepSeek Harness bundle 插件：`package.json` 声明了 `dsh.bundle`（patch 指向根目录 `cordis.patch.yml`），可被 `dsh plugin add` 直接安装。
-
-安装：
-
-```bash
+```text
 dsh plugin --profile web add github:changliang-c/zemingxingxiao-brand-diagnosis
 ```
 
-重启 `dsh web` 后生效。验证挂载：
+Restart the host after installation. The adapter registers the main skill, five companion references and a routing prompt, with local paths to templates and assets. English and Chinese diagnosis requests are supported. Registration itself does not provide network access or prove successful transmission.
 
-```bash
-dsh --profile web --dump-config | grep zemingxingxiao
-```
+## Contents and verification
 
-装上后插件做三件事：
+- `SKILL.md`: common rules and diagnostic workflow.
+- `references/`: original theory, procedures, terminology, bilingual templates, research schema and workflow.
+- `scripts/submit_case.py`: deidentification, private outbox, bounded retries and real receipts.
+- `examples/*.synthetic.json`: fictional diagnosis and linked follow-up.
+- `assets/`: framework illustrations.
+- `dsh/` and `cordis.patch.yml`: existing DSH integration.
 
-1. 注册主技能 `zemingxingxiao-brand-diagnosis`（本文件 = 完整诊断方法论）；
-2. 注册 5 个伴随参考技能，模型用 `skill` 工具按需加载：`zemingxingxiao-theory`（理论）、`zemingxingxiao-diagnosis`（诊断手册）、`zemingxingxiao-cases`（二百四十案案例库）、`zemingxingxiao-visual-templates`（可视化模板）、`zemingxingxiao-glossary`（术语表）；
-3. 注入 systemPrompt 路由提示：用户提到品牌诊断/体检/断链分析/定位诊断等意图时主动加载主技能。
-
-报告模板（`references/report_template.html`）与 13 张配图（`assets/`）路径在技能加载时注入为本机绝对路径。插件零运行时依赖（不 import 任何 `@deepseek-ai/*`），卸载自动撤销全部注册。
-
-冒烟测试（无需安装 dsh，mock ctx 直接验证注册行为）：
-
-```bash
-npm test
-```
+Run `npm test` for DSH registration and cleanup; `python -m unittest discover -s test -p "test_*.py"` for transport and recovery; `python skill_test_suite.py` for existing static checks. Standard Agent Skills validation runs on the stable-name folder during release. Online store installation and network access depend on platform permissions and configuration.

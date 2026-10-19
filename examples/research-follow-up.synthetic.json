@@ -1,0 +1,172 @@
+{
+  "schema_version": "3.0",
+  "record_type": "follow_up",
+  "case_id": "synthetic_case_20261019_0001",
+  "submission_id": "synthetic_followup_20261019_0001",
+  "version": 2,
+  "source_platform": "local-isolated-test",
+  "skill_version": "2.5.0",
+  "report_language": "zh-CN",
+  "authorization": {
+    "status": "authorized",
+    "purpose": "internal_research",
+    "basis": "全量虚构数据，专用于本地验收。"
+  },
+  "deidentification": {
+    "reviewed": true,
+    "identity_terms": [
+      "虚构示例餐厅",
+      "示例负责人"
+    ],
+    "residual_risk": "low"
+  },
+  "context": {
+    "industry": "餐饮",
+    "business_model": "门店即时消费",
+    "stage": "稳定经营",
+    "scale_band": "单店、月订单约10000",
+    "customer_segment": "附近工作与生活客群",
+    "purchase_scenario": "工作日午餐",
+    "channels": [
+      "门店自然客流",
+      "付费本地推广"
+    ],
+    "goal": "在不降低毛利率的情况下改善成熟新客群复购",
+    "constraints": [
+      "预算3000元",
+      "不扩大人员编制"
+    ]
+  },
+  "observations": [
+    {
+      "observation_id": "repeat-followup",
+      "metric": "30天新客复购率",
+      "value": 0.17,
+      "unit": "ratio",
+      "numerator": 170,
+      "denominator": 1000,
+      "period": {
+        "start": "2026-07-01",
+        "end": "2026-08-31",
+        "window_days": 30,
+        "matured": true
+      },
+      "definition": "复购人数/首次消费后满30天的新客人数；每人最多计一次，不含未成熟窗口。",
+      "source": "合成验收数据，不是真实客户",
+      "evidence_type": "measured",
+      "population": "完成30天观察的新客1000人；不上传客户明细",
+      "missing": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev-followup",
+      "statement": "合成记录：1000名已满30天观察的新客中170人复购。",
+      "evidence_type": "measured",
+      "source": "合成聚合订单核对",
+      "observation_refs": [
+        "repeat-followup"
+      ],
+      "limitations": [
+        "没有随机对照"
+      ]
+    }
+  ],
+  "diagnosis": {
+    "primary_break": "土：留存承接不足",
+    "secondary_breaks": [
+      "水：付费获客成本需追踪"
+    ],
+    "reasoning": "复购120/1000且离店后缺少再次到店机制，优先试验低成本承接动作。检查有顺序，修复无固定顺序。",
+    "supporting_evidence": [
+      "ev-retention"
+    ],
+    "counter_evidence": [
+      "已有自然回头客，不能推断完全没有留存"
+    ],
+    "alternative_explanations": [
+      "菜品匹配",
+      "服务体验",
+      "季节与节假日"
+    ],
+    "confidence": 0.65,
+    "missing_evidence": [
+      "同口径未接受动作的对照群体"
+    ],
+    "theory_version": "2.5.0"
+  },
+  "predictions": [
+    {
+      "prediction_id": "pred-repeat",
+      "action_ids": [
+        "return-visit"
+      ],
+      "metric": "30天新客复购率",
+      "baseline_observation_id": "repeat-baseline",
+      "expected_change": "成熟新客群复购率从12%向17%改善；属于可检验预期而非保证。",
+      "deadline": "2026-08-31",
+      "falsification": "执行充分且观察窗口成熟后仍≤12%，应否定或调整留存承接是主断点的判断。"
+    }
+  ],
+  "recommended_actions": [
+    {
+      "action_id": "return-visit",
+      "description": "首次用餐离店时提供下次到店承接，并在有授权的自有渠道提醒。",
+      "status": "planned",
+      "start_date": "2026-07-01",
+      "end_date": "2026-08-31",
+      "investment": 3000,
+      "investment_unit": "CNY",
+      "scope": "同一门店的1000名新客聚合群体",
+      "execution_extent": "计划覆盖100%收银班次",
+      "concurrent_changes": [],
+      "evidence_refs": [
+        "ev-retention"
+      ]
+    }
+  ],
+  "actual_actions": [
+    {
+      "action_id": "return-visit",
+      "description": "首次用餐离店时提供下次到店承接，并在有授权的自有渠道提醒。",
+      "status": "completed",
+      "start_date": "2026-07-01",
+      "end_date": "2026-08-31",
+      "investment": 2800,
+      "investment_unit": "CNY",
+      "scope": "同一门店的1000名新客聚合群体",
+      "execution_extent": "实际覆盖90%收银班次",
+      "concurrent_changes": [
+        "同期换了两款午餐菜单",
+        "没有降价",
+        "含一个节假日"
+      ],
+      "evidence_refs": [
+        "ev-followup"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "observation_id": "repeat-followup",
+      "baseline_observation_id": "repeat-baseline",
+      "result": "improved",
+      "sample_size": 1000,
+      "observation_window": "新客首次消费后完整30天，成熟队列",
+      "control": "无随机或同期未干预对照",
+      "confounders": [
+        "菜单更新",
+        "节假日"
+      ],
+      "attribution": "unestablished",
+      "interpretation": "复购从120/1000到170/1000，增加5个百分点；不能单凭前后变化归因于处方。",
+      "adverse_effects": [
+        "部分员工反馈离店提示增加工作量"
+      ]
+    }
+  ],
+  "objections": [
+    "经营者认为菜品更新可能是主要原因，要求保留异议。"
+  ],
+  "parent_submission_id": "synthetic_initial_20261019_0001"
+}

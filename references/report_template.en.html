@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Project name] Brand Diagnosis Report</title>
+<style>
+  /* === 全局 === */
+  body {
+    margin: 0; padding: 40px 20px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    color: #2c2c2c; line-height: 1.9; background: #fff;
+  }
+  /* === 水印：半透明"择命行效"全页重复 === */
+  body::before {
+    content: "择命行效";
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 200px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.04);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 30px;
+  }
+  body::after {
+    content: "择命行效";
+    position: fixed; top: 15%; left: 8%;
+    transform: rotate(-30deg);
+    font-size: 150px; font-weight: 900;
+    color: rgba(212, 160, 23, 0.03);
+    z-index: 0; pointer-events: none;
+    white-space: nowrap; letter-spacing: 20px;
+  }
+  /* === 报告容器 === */
+  .report { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  /* === 标题区 === */
+  .report-header { text-align: center; border-bottom: 3px solid #D4A017; padding-bottom: 24px; margin-bottom: 32px; }
+  .report-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; }
+  .report-subtitle { font-size: 14px; color: #666; line-height: 1.6; }
+  .report-subtitle .theory-name { font-weight: 600; color: #D4A017; }
+  /* === 正文节 === */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a1a; border-left: 4px solid #D4A017; padding-left: 12px; margin: 0 0 12px 0; }
+  .section-content { font-size: 15px; color: #333; }
+  /* === 状态标记 === */
+  .status { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; margin: 0 4px; }
+  .status.sheng { background: #e8f5e9; color: #2e7d32; }
+  .status.xie { background: #fff3e0; color: #e65100; }
+  .status.hao { background: #ffebee; color: #c62828; }
+  /* === SVG 图表区 === */
+  .chart-container { margin: 16px 0; text-align: center; }
+  .chart-container svg { max-width: 100%; height: auto; }
+  .chart-caption { font-size: 13px; color: #888; margin-top: 6px; }
+  /* === 表格 === */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #e0e0e0; padding: 8px 12px; text-align: left; }
+  th { background: #fafafa; font-weight: 600; }
+  /* === 落款 === */
+  .footer-disclaimer { margin-top: 40px; padding: 20px; border-top: 2px solid #e0e0e0; font-size: 13px; color: #888; line-height: 1.8; }
+  /* === 五行配色 === */
+  .ele-jin { color: #D4A017; }
+  .ele-shui { color: #2196F3; }
+  .ele-mu { color: #4CAF50; }
+  .ele-huo { color: #F44336; }
+  .ele-tu { color: #795548; }
+  /* === 打印 === */
+  @media print {
+    body { padding: 0; }
+    body::before, body::after { opacity: 0.06 !important; }
+    .report { max-width: none; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="report-header">
+    <h1 class="report-title"><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->Brand Diagnosis Report</h1>
+    <div class="report-subtitle">
+      Framework: <span class="theory-name">择命行效 / Zemingxingxiao — Five-Element Business Diagnosis</span><br>
+      Created by Chang Liang (常亮) | Operated by 北京常识宋道商业咨询策划有限公司
+    </div>
+  </div>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="section">
+    <h2 class="section-title">0. Diagnostic Summary</h2>
+    <div class="section-content">
+      <p><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="section">
+    <h2 class="section-title"><span class="ele-jin">1. Metal — Positioning and Choices</span> (Positioning)</h2>
+    <div class="section-content">
+      <p><strong>Observed situation: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Assessment: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --> <span class="status sheng">Generating</span><span class="status xie">Leaking</span><span class="status hao">Consuming</span></p>
+      <p><strong>Action: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title"><span class="ele-shui">2. Water — Acquisition and Channels</span> (Acquisition)</h2>
+    <div class="section-content">
+      <p><strong>Observed situation: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Assessment: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Action: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title"><span class="ele-mu">3. Wood — Product and Delivery</span> (Product)</h2>
+    <div class="section-content">
+      <p><strong>Observed situation: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Assessment: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Action: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title"><span class="ele-huo">4. Fire — Conversion and Activation</span> (Conversion)</h2>
+    <div class="section-content">
+      <p><strong>Observed situation: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Assessment: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Action: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title"><span class="ele-tu">5. Earth — Retention and Assets</span> (Retention)</h2>
+    <div class="section-content">
+      <p><strong>Observed situation: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Assessment: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+      <p><strong>Action: </strong><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <!-- ====== 6. Four-State Assessment ====== -->
+  <div class="section">
+    <h2 class="section-title">6. Four-State Assessment</h2>
+    <div class="section-content">
+      <p><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="section">
+    <h2 class="section-title">7. Repair Priorities</h2>
+    <div class="section-content">
+      <p><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    </div>
+  </div>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="section">
+    <h2 class="section-title">8. Verification Criteria</h2>
+    <div class="section-content">
+      <p>Repeat-purchase target: <!-- XX% --></p>
+      <p>Organic-traffic share target: <!-- XX% --></p>
+      <p>Returning-customer revenue share target: <!-- XX% --></p>
+    </div>
+  </div>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="section">
+    <h2 class="section-title">9. Visual Analysis</h2>
+    <!-- ①Five-element chain diagnosis -->
+    <div class="chart-container">
+      <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+      <div class="chart-caption">Five-element chain diagnosis</div>
+    </div>
+    <!-- ②Four-state positioning -->
+    <div class="chart-container">
+      <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+      <div class="chart-caption">Four-state positioning</div>
+    </div>
+    <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+    <div class="chart-container">
+      <table><tr><th>Element</th><th>Status</th><th>Break</th><th>Repair priority</th><th>Expected duration</th></tr><!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></table>
+      <div class="chart-caption">Breaks and repair priorities</div>
+    </div>
+    <!-- ④Early-warning radar -->
+    <div class="chart-container">
+      <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+      <div class="chart-caption">Early-warning radar</div>
+    </div>
+  </div>
+
+  <aside class="section feedback-card">
+    <h2 class="section-title">Outcome Follow-up</h2>
+    <p>Case ID: <!-- case_id -->; receipt status: <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->; follow-up date: <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    <p>Please update: actual actions and dates; investment and execution level; comparable before/after metrics, denominators and observation windows; concurrent changes; no improvement, adverse effects or disagreement.</p>
+    <p>Research records are for internal analysis and are not automatically published. Without a comparison group, metric changes do not establish the diagnosis as the cause.</p>
+  </aside>
+
+  <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->
+  <div class="footer-disclaimer">
+    <p><strong>Attribution, License and Disclaimer</strong></p>
+    <p>This tool and its templates may be used, copied, modified, redistributed and used commercially under the Zemingxingxiao Free Commercial Use License 1.0. Retain attribution, copyright and license notices. No license fee or retroactive claim on ordinary commercial proceeds applies. Names and marks may not be impersonated. <a href="https://github.com/changliang-c/zemingxingxiao-brand-diagnosis/blob/main/LICENSE">Read the license</a>。</p>
+    <p>Zemingxingxiao (择命行效), created by Chang Liang (常亮); operated by 北京常识宋道商业咨询策划有限公司. Copyright in original expression does not create exclusive rights over general ideas, methods or public knowledge.</p>
+    <p>This AI-generated report applies the Zemingxingxiao framework. Its conclusions support judgment and are not the sole basis for investment or business decisions.</p>
+  </div>
+
+</div>
+</body>
+</html>

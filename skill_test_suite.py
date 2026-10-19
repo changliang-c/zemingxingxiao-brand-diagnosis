@@ -912,9 +912,15 @@ def test_documentation(suite):
             return False, "缺少版权声明"
         if "常亮" not in content:
             return False, "版权声明未提及理论创立人"
-        if "开源协作" not in content:
-            return False, "缺少'开源协作'声明"
-        return True, "版权声明完整"
+        if "免费商用许可 1.0" not in content:
+            return False, "缺少当前免费商用许可声明"
+        current_files = ["SKILL.md", "README.md", "README.zh-CN.md", "LICENSE", "RIGHTS.md", "references/report_template.html", "references/report_template.en.html"]
+        obsolete = ["商业使用需联系作者授权", "不授予转售、再分发与商业使用权利", "授权联系方式（申请商用授权）"]
+        for name in current_files:
+            text = (SKILL_DIR / name).read_text(encoding="utf-8")
+            if any(term in text for term in obsolete):
+                return False, f"{name} 仍有旧商业限制"
+        return True, "当前发布文件免费商用许可一致"
     suite.run_test("版权声明", t, "P3")
 
     # 7.2 author 字段
@@ -923,9 +929,9 @@ def test_documentation(suite):
         author_match = re.search(r'author:\s*(.+)', fm)
         if not author_match:
             return False, "缺少 author 字段"
-        author = author_match.group(1).strip()
-        if author != "常亮":
-            return False, f"author = '{author}'，应为 '常亮'"
+        author = author_match.group(1).strip().strip('\"\'')
+        if author not in {"常亮", "常亮 / Chang Liang"}:
+            return False, f"author = '{author}'，应保留 '常亮' 署名"
         return True, f"author = '{author}'"
     suite.run_test("author 字段", t, "P3")
 

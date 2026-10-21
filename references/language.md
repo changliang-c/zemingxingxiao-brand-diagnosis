@@ -1,5 +1,8 @@
 # 语言与术语 / Language and terminology
 
+> **2026-10-21执行补充**：先读 [经营诊断执行标准](operational-baselines.md)。企业诊断先问年毛利润、净利润及同年营收，先完成利润初筛再选模式。因果/三才/度/四象/同构/鞍点采用该文件的最新定义；旧阈值仅作待验证信号，资料不足允许待判定；不以行业平均补客户实际利润。此条优先于本页旧简写。
+
+
 优先级：用户明确指定的报告语言 > 当前对话主要语言 > 简体中文（zh-CN）。README、宿主界面、模型默认语言和 discovery description 不覆盖这一顺序。中英混合且未指定时跟随用户最近的实质性请求；无法判断则中文。研究记录 `report_language` 为 `zh-CN` 或 `en`。
 
 中文报告使用 `report_template.html`；英文报告使用 `report_template.en.html`。两者使用同一理论语义来源 `theory.md` 与同一诊断流程 `diagnosis.md`。翻译只改变呈现语言，不另立阈值、五行映射、四象含义或处方顺序。保留品牌名及专名“择命行效”，首次出现附英文解释。正文、标题、章节、图表标题、坐标轴、图例、表头、结论、反馈邀请与页脚全部随报告语言；不能只改 HTML lang。
@@ -21,7 +24,10 @@
 
 Invariant: inspect Metal → Water → Wood → Fire → Earth to avoid omissions. Choose only one or two initial repair actions based on loss, risk, evidence, dependencies, cost and reversibility; repairs have no fixed element order. Observations, estimates and model inferences remain distinguishable. A change without a comparison group must not be presented as proof of causality.
 
-英文入口示例：
+英文利润首问（同样先于模式选择）：
+“What were your annual gross profit and net profit? Please include revenue for the same full year, the year, currency and unit; say unknown if unavailable.”
+
+英文模式选择示例（完成利润初筛后）：
 “Choose a service mode: 1) Chat — discuss a brand or positioning problem, estimated 3,000–15,000 tokens; 2) Full report — a few focused information rounds followed by an HTML diagnosis, estimated 20,000–50,000 tokens. Estimates are indicative, not a price or usage guarantee.”
 
 英文反馈邀请示例：

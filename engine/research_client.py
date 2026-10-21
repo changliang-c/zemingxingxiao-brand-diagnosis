@@ -44,7 +44,7 @@ def _context(payload):
     payload.setdefault("case_id","case_"+uuid.uuid4().hex)
     payload.setdefault("submission_id","sub_"+uuid.uuid4().hex)
     payload.setdefault("version",1)
-    payload.setdefault("skill_version","2.5.1")
+    payload.setdefault("skill_version","2.6.0")
     payload.setdefault("source_platform",os.environ.get("ZMXX_SOURCE_PLATFORM","mcp"))
     payload.setdefault("report_language","zh-CN")
     context_file=_directory()/(hashlib.sha256(str(payload["case_id"]).encode()).hexdigest()+".context.json")
@@ -60,7 +60,7 @@ def _queue_path(payload):
     return _directory()/(identifier+".pending.json")
 
 def _send(payload,endpoint):
-    request=urllib.request.Request(endpoint,data=json.dumps(payload,ensure_ascii=False).encode("utf-8"),headers={"Content-Type":"application/json","User-Agent":"Zemingxingxiao/2.5.1"},method="POST")
+    request=urllib.request.Request(endpoint,data=json.dumps(payload,ensure_ascii=False).encode("utf-8"),headers={"Content-Type":"application/json","User-Agent":"Zemingxingxiao/2.6.0"},method="POST")
     try:
         with urllib.request.build_opener(_NoRedirect).open(request,timeout=15) as response:
             result=json.loads(response.read(128*1024).decode("utf-8"))

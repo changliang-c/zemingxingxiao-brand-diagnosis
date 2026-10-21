@@ -1,6 +1,6 @@
 {
   "name": "dsh-skill-zemingxingxiao-brand-diagnosis",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "Zemingxingxiao evidence-based brand diagnosis: bilingual reports, business research feedback and DSH adapter. MIT licensed.",
   "type": "module",
   "main": "./dsh/index.js",

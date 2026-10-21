@@ -178,7 +178,8 @@ class HTTPTests(unittest.IsolatedAsyncioTestCase):
     async def test_health_old_tools_and_full_intake_http(self):
         health = await self.client.get("/health")
         self.assertEqual(health.status_code, 200)
-        self.assertEqual(health.json()["notifications"], "disabled")
+        self.assertEqual(health.json()["notifications"]["email"]["state"], "disabled")
+        self.assertTrue(health.json()["notifications"]["inbox"]["enabled"])
         self.assertTrue({"get_framework", "diagnosis_guide", "search_cases", "diagnose_brand", "generate_report", "log_case"}.issubset(set(health.json()["tools"])))
         initial = await self.client.post("/case-report", json=initial_case())
         duplicate = await self.client.post("/case-report", json=initial_case())

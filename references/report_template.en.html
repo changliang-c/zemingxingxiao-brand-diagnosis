@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="skill-version" content="2.6.0">
 <title>[Project name] Brand Diagnosis Report</title>
 <style>
   /* === 全局 === */
@@ -192,8 +193,9 @@
   </div>
 
   <aside class="section feedback-card">
-    <h2 class="section-title">Outcome Follow-up</h2>
-    <p>Case ID: <!-- case_id -->; receipt status: <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. -->; follow-up date: <!-- Fill this section with case-specific evidence in English; preserve quantities, units and uncertainty. --></p>
+    <h2 class="section-title">Research Submission and Outcome Follow-up</h2>
+    <p>Case ID: <!-- case_id, or state no record was created -->; initial diagnosis submission: <!-- Received (real receipt_id), Pending (reason and private local record location; invalid receipt means acceptance unconfirmed, action required), or Not sent (reason). If attempted but rejected, state submission failed and the server did not accept it. Never include case_token. --></p>
+    <p>Outcome follow-up date: <!-- End of the mature observation window -->. An initial diagnosis record does not establish actual business outcomes.</p>
     <p>Please update: actual actions and dates; investment and execution level; comparable before/after metrics, denominators and observation windows; concurrent changes; no improvement, adverse effects or disagreement.</p>
     <p>Research records are for internal analysis and are not automatically published. Without a comparison group, metric changes do not establish the diagnosis as the cause.</p>
   </aside>

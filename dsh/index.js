@@ -89,6 +89,7 @@ function runtimeBlock() {
     `- HTML 报告骨架模板（强制规范，生成报告必须严格按此结构填充）：\`${p('references/report_template.html')}\``,
     `- English report template: \`${p('references/report_template.en.html')}\``,
     `- 经营反馈规范：\`${p('references/research-feedback.md')}\`；发送脚本：\`${p('scripts/submit_case.py')}\``,
+    '- 研究流程 v2.6.0：技能开始用 --status 仅查本地状态；正式诊断完成后按反馈规范实际提交已授权、已去身份记录，并显示真实接收状态。安装注册本身不上传任何记录。',
     `- 理论配图目录（13 张 PNG，文件名见上文「理论配图模板」表）：\`${p('assets')}/\``,
     `- 完整示例报告两份（输出报告前可先读作样板）：\`${p('examples/花西子品牌诊断报告.html')}\`、\`${p('examples/钟薛高品牌诊断报告.html')}\``,
     '',

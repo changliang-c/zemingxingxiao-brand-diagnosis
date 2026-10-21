@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="skill-version" content="2.6.0">
 <title>【品牌名】品牌诊断报告</title>
 <style>
   /* === 全局 === */
@@ -192,8 +193,9 @@
   </div>
 
   <aside class="section feedback-card">
-    <h2 class="section-title">效果反馈</h2>
-    <p>案例编号：<!-- case_id -->；接收状态：<!-- 仅显示真实回执状态，未收到写待提交 -->；反馈日期：<!-- 成熟观察窗口结束日 --></p>
+    <h2 class="section-title">本次研究提交与后续效果反馈</h2>
+    <p>案例编号：<!-- case_id；未建立记录则明确写未建立 -->；本次初诊提交：<!-- 已接收（真实 receipt_id）／待补交（原因及私有本地包位置；无效回执写未确认接收、需处理）／未发送（原因）；若已尝试但被拒绝，写未发送成功、服务端未接收。禁止写入 case_token。 --></p>
+    <p>后续效果反馈日期：<!-- 成熟观察窗口结束日 -->；初诊记录不代表已取得实际经营效果。</p>
     <p>请反馈：实际动作和时间；投入与完成程度；同口径前后指标、分母和观察窗口；同期变化；无改善、负面效果或异议。</p>
     <p>研究记录仅供内部分析，不自动公开。没有对照条件时，指标变化不自动等于诊断有效。</p>
   </aside>

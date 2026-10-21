@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""择命行效 2.5.1: existing MCP transport + private evidence research intake.
-No hardcoded credential, no mail notification, no public research read endpoint.
+"""择命行效 2.6.0: MCP, private evidence intake and private notification status.
+No hardcoded credential or public research read endpoint. SMTP runs separately.
 """
 import hashlib
 import hmac
@@ -25,6 +25,7 @@ if _BASE not in sys.path:
 from server import TOOLS, call_tool
 from case_store import (CASE_SCHEMA, MAX_BODY, VERSION, CaseValidationError,
                         accept_case, accept_legacy_case, read_cases)
+from research_notifications import notification_health, read_status
 
 def _to_tool(t):
     return types.Tool(name=t["name"], title=t.get("title", t["name"]),
@@ -52,8 +53,9 @@ async def _call_tool(ctx, params):
     return types.CallToolResult(content=[types.TextContent(type="text", text=json.dumps(result, ensure_ascii=False))], is_error=True)
 
 async def _health(request):
+    notifications = await run_in_threadpool(notification_health)
     return JSONResponse({"status": "ok", "service": "zemingxingxiao-engine", "version": VERSION,
-                         "case_schema_version": "3.0", "notifications": "disabled", "tools": [t["name"] for t in TOOLS]})
+                         "case_schema_version": "3.0", "notifications": notifications, "tools": [t["name"] for t in TOOLS]})
 
 CASE_MAX_BODY = MAX_BODY
 CASE_RATE_LIMIT = 20
@@ -150,11 +152,28 @@ async def _case_report(request):
     except Exception:
         return _reply(request, {"ok": False, "error": "storage_unavailable", "message": "Keep the sanitized local submission and retry with the same submission_id."}, 503)
 
-async def _case_report_list(request):
-    """Private admin read. Query tokens intentionally unsupported (URL log leaks)."""
+def _admin_authorized(request):
     expected = os.environ.get("ZMXX_CASE_READ_TOKEN", "")
     provided = request.headers.get("authorization", "")
-    if len(expected) < 32 or not hmac.compare_digest(provided.encode("utf-8"), ("Bearer " + expected).encode("utf-8")):
+    return len(expected) >= 32 and hmac.compare_digest(provided.encode("utf-8"), ("Bearer " + expected).encode("utf-8"))
+
+
+async def _case_report_status(request):
+    """Protected read-only operational view; no business content or mailboxes."""
+    if not _admin_authorized(request):
+        return JSONResponse({"ok": False, "error": "unauthorized"}, status_code=401, headers={"Cache-Control": "no-store"})
+    try:
+        result = await run_in_threadpool(read_status, limit=int(request.query_params.get("n", "50")))
+        return JSONResponse(result, headers={"Cache-Control": "no-store"})
+    except ValueError:
+        return JSONResponse({"ok": False, "error": "invalid_pagination"}, status_code=400, headers={"Cache-Control": "no-store"})
+    except Exception:
+        return JSONResponse({"ok": False, "error": "storage_unavailable"}, status_code=503, headers={"Cache-Control": "no-store"})
+
+
+async def _case_report_list(request):
+    """Private admin read. Query tokens intentionally unsupported (URL log leaks)."""
+    if not _admin_authorized(request):
         return JSONResponse({"ok": False, "error": "unauthorized"}, status_code=401, headers={"Cache-Control": "no-store"})
     try:
         limit = int(request.query_params.get("n", "50"))
@@ -176,6 +195,7 @@ _MODE = os.environ.get("MCP_MODE", "stateful").strip().lower()
 app = server.streamable_http_app(streamable_http_path="/mcp", json_response=_MODE == "stateless", stateless_http=_MODE == "stateless",
     custom_starlette_routes=[Route("/health", _health, methods=["GET"]),
         Route("/case-report", _case_report, methods=["POST"]), Route("/case-report", _case_options, methods=["OPTIONS"]),
+        Route("/case-report/status", _case_report_status, methods=["GET"]),
         Route("/case-report/list", _case_report_list, methods=["GET"]), Route("/case-report/schema", _case_schema, methods=["GET"])],
     transport_security=TransportSecuritySettings(allowed_hosts=["zmxx.work", "zmxx.work:*", "www.zmxx.work", "www.zmxx.work:*"]))
 

@@ -28,3 +28,4 @@ node_modules/
 *.receipt.json
 *.case-token.json
 *.private-receipt.json
+*.status.json

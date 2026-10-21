@@ -5,7 +5,7 @@
   "submission_id": "synthetic_followup_20261019_0001",
   "version": 2,
   "source_platform": "local-isolated-test",
-  "skill_version": "2.5.1",
+  "skill_version": "2.6.0",
   "report_language": "zh-CN",
   "authorization": {
     "status": "authorized",

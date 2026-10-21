@@ -1,4 +1,4 @@
-"""Bilingual reports; the diagnostic rules remain in server.py (v2.5.1)."""
+"""Bilingual reports; the diagnostic rules remain in server.py (v2.6.0)."""
 import html
 import json
 import math
@@ -6,8 +6,11 @@ import os
 import re
 import uuid
 from pathlib import Path
+from business_baseline import (
+    DIAGNOSTIC_REVISION, assess_service_fit, fit_summary, normalize_context, context_lines,
+)
 
-VERSION = "2.5.1"
+VERSION = "2.6.0"
 ORDER = ["金", "水", "木", "火", "土"]
 COLORS = ["#ad8846", "#246b67", "#47694d", "#a94f36", "#766758"]
 ELEMENTS_EN = {"金": "Metal · positioning", "水": "Water · acquisition", "木": "Wood · product assets", "火": "Fire · conversion", "土": "Earth · retention"}
@@ -56,7 +59,7 @@ def _md(value):
 def _svg(kind, fe, xiang, en):
     label = (lambda e: ELEMENTS_EN[e]) if en else (lambda e: e)
     status = (lambda s: STATUS_EN.get(s, "Unverified")) if en else (lambda s: s)
-    title = ({"chain": "Five-element diagnostic chain", "xiang": "Four configurations", "radar": "Diagnostic status map"} if en else {"chain": "五行链条诊断图", "xiang": "四象定位图", "radar": "诊断状态示意图"})[kind]
+    title = ({"chain": "Five-element diagnostic chain", "xiang": "Four-configuration initial screen", "radar": "Diagnostic status map"} if en else {"chain": "五行链条诊断图", "xiang": "四象初筛图·待情境核实", "radar": "诊断状态示意图"})[kind]
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330" role="img" aria-label="{_e(title)}"><rect width="820" height="330" fill="#f6f2e9"/><text x="30" y="34" font-family="sans-serif" font-size="20" fill="#244e46">{_e(title)}</text>']
     if kind == "chain":
         for i,e in enumerate(ORDER):
@@ -98,6 +101,14 @@ def generate_report(args, base_dir, interpretations, neutral, element_names):
     language=resolve_language(args,diagnosis); en=language=="en"
     brand=_text(args.get("brand_name") or diagnosis.get("brand_name") or ("Unnamed project" if en else "未命名项目"))
     industry=_text(diagnosis.get("industry") or args.get("industry") or "")
+    intake=args.get("financial_intake", diagnosis.get("financial_intake"))
+    if isinstance(intake,dict):
+        intake=dict(intake); intake.setdefault("industry",industry)
+    elif intake is None:
+        intake={"industry":industry}
+    service_fit=assess_service_fit(intake)
+    operational_context=normalize_context(args.get("operational_context",diagnosis.get("operational_context")))
+    context_detail=context_lines(operational_context,en)
     fe=diagnosis.get("five_elements") or {}; xiang=(diagnosis.get("four_xiang") or {}).get("xiang","待判定")
     breaks=[e for e in diagnosis.get("break_chain",[]) if e in ORDER]
     repairs=[e for e in diagnosis.get("repair_order",[]) if e in ORDER]
@@ -111,18 +122,20 @@ def generate_report(args, base_dir, interpretations, neutral, element_names):
     chain=" → ".join(f'{name(e)}: {state(fe.get(e,{}).get("status","待验证"))}' for e in ORDER)
     no_break="No clear break established" if en else "无明显断点"
     direction=EN_CONFIG.get(xiang,EN_CONFIG["待判定"]) if en else ZH_CONFIG.get(xiang,ZH_CONFIG["待判定"])
-    add("0 · Diagnostic summary" if en else "〇 诊断摘要", [chain], [("Configuration: " if en else "入象：")+config,("Breaks requiring evidence review: " if en else "待核实断链环：")+("; ".join(name(e) for e in breaks) or no_break),("Suggested direction: " if en else "处方方向：")+direction])
+    add("0 · Diagnostic summary" if en else "〇 诊断摘要", fit_summary(service_fit,en)+[chain], [("Initial configuration screen, pending context review: " if en else "四象初筛，待情境核实：")+config,("Breaks requiring evidence review: " if en else "待核实断链环：")+("; ".join(name(e) for e in breaks) or no_break),("Provisional direction, pending context review: " if en else "候选方向，待情境核实：")+direction]+context_detail[:2])
     for i,e in enumerate(ORDER,1):
         st=fe.get(e,{}).get("status","待验证")
         interpretation=EN_INTERPRETATION[e].get(st,EN_INTERPRETATION[e]["待验证"]) if en else ZH_INTERPRETATION[e].get(st,ZH_INTERPRETATION[e]["待验证"])
         add(f'{i} · {name(e)}',[("Assessment: " if en else "判定：")+state(st),interpretation])
     configtext=EN_CONFIG.get(xiang,EN_CONFIG["待判定"]) if en else ZH_CONFIG.get(xiang,ZH_CONFIG["待判定"])
-    add("6 · Four-configuration assessment" if en else "六 四象判定",[config,configtext])
+    screen_note=("The water/fire label is only an initial screen, not a conclusion about the business stage or causality. Verify it against the causal loop, three powers, transition conditions and action timing." if en else "水火标签仅是初筛，不是经营阶段或因果定论；须结合因果循环、三才、阶段转换条件和行动时机核实。")
+    add("6 · Four-configuration initial screen" if en else "六 四象初筛·待情境核实",[config,screen_note,configtext],context_detail[3:5])
     rule=("Inspect Metal → Water → Wood → Fire → Earth. Repair has no fixed sequence: prioritize loss, risk, evidence, dependencies, cost and reversibility. The list is a provisional assessment; choose only one or two actions after reviewing the current decision and loss limits." if en else "检查按金→水→木→火→土逐项查全；修复无固定顺序，按损失、风险、证据、依赖、成本、可逆性排序。以下为候选排序，结合当前决定、损失底线与经营记录确认后，一次只选一至两项。")
-    add("7 · Repair priorities" if en else "七 修复优先级",[rule],[name(e)+": "+(EN_REPAIR[e] if en else interpretations["repair"][e]) for e in repairs])
+    add("7 · Repair priorities" if en else "七 修复优先级",[rule],[name(e)+": "+(EN_REPAIR[e] if en else interpretations["repair"][e]) for e in repairs]+context_detail[5:])
     baseline=("Record repeat-purchase rate, organic acquisition share and returning-customer sales share, including numerator, denominator, period, definition and source. Review at 90 days or after an appropriate mature cohort window. Keep facts, estimates and model inferences separate." if en else "记录复购率、自然流占比和老客成交占比的值、分子、分母、周期、口径及来源；以本次为基线，90天或适合行业的成熟观察窗口复检。区分事实、估计与模型推断。")
     conclusion=("These are rule-based diagnostic signals, not verified causal findings. Preserve contrary evidence and alternative explanations. An uncontrolled before-and-after change alone does not establish that the diagnosis caused the result." if en else "以上是规则诊断信号，不是已经证实的因果结论。保留反证、替代解释与缺失项；没有对照的前后变化，不能自动归因于诊断。")
-    add("8 · Verification and conclusion" if en else "八 验收标准与结论",[baseline,conclusion])
+    context_note=("Context is supplied evidence, not automatically verified theory. Missing fields remain 'Not provided'; no universal threshold is substituted." if en else "经营情境为提供的证据，尚需核验；缺少字段标未提供，不套统一门槛。")
+    add("8 · Verification and conclusion" if en else "八 验收标准与结论",[baseline,conclusion,context_note],[context_detail[2]])
     case_id=_text(args.get("case_id") or "")
     follow=("Please report the action actually taken, dates, spending, completion, results under the same metric definition, sample size, mature observation window, concurrent changes, and any failure, no improvement or disagreement. Use the same case ID and the initial submission ID for a follow-up. Research records are for internal analysis and are not automatically published." if en else "请反馈实际做了什么、起止时间、投入与执行程度，以及同口径结果、样本量、成熟观察窗口、同期其他变化；无改善、负面结果和异议同样有价值。后续反馈沿用案例编号并关联初诊提交编号。研究案例仅供内部分析，不自动公开。")
     add("9 · Outcome feedback" if en else "九 效果反馈",[follow]+[("Case ID: " if en else "案例编号：")+case_id] if case_id else [follow])
@@ -153,7 +166,9 @@ def generate_report(args, base_dir, interpretations, neutral, element_names):
         if bs: md+='\n'.join('- '+_md(b) for b in bs)+'\n\n'
     md+='---\n\n'+_md(disclaimer)+'\n\n'+_md(license_text)
     instruction=("Deliver the report in English. Preserve computed assessments. Expand only evidence-supported interpretations; do not invent business facts. Include the available report link or local file and outcome-feedback invitation. Do not claim successful research submission without a receipt." if en else "用简体中文交付报告，保留规则判定；解读只能结合已有经营证据展开，不得编造事实。交付可用报告链接或本地文件并主动邀请效果反馈；无接收回执不得声称回传成功。")
+    instruction += (" Profit thresholds are flexible service-fit reminders, never automatic rejection; continue when the informed user wishes. Keep unverified financial data visible and the water/fire configuration provisional." if en else " 利润门槛仅柔性适配提醒，绝不自动拒单，用户知情坚持则继续；保留财务待核项，水火四象只作待情境核实的初筛。")
     result={"brand_name":brand,"industry":industry,"report_language":language,"report_url":report_url,"report_file":report_file,"ai_instruction":instruction,"version":VERSION,"artifact_status":"saved" if report_file else "inline_only"}
+    result.update({"diagnostic_revision":DIAGNOSTIC_REVISION,"service_fit":service_fit,"operational_context":operational_context})
     if artifact_error: result["artifact_error"]=artifact_error
     result["html" if str(args.get("format","markdown")).lower()=="html" else "markdown"]=report if str(args.get("format","markdown")).lower()=="html" else md
     return result

@@ -14,6 +14,10 @@ from datetime import datetime
 
 from interpretation_neutral import INTERPRETATION_NEUTRAL, INDUSTRY_LEXICON, AI_INSTRUCTION
 from report_renderer import generate_report as render_report, resolve_language
+from business_baseline import (
+    DIAGNOSTIC_REVISION, FIRST_QUESTION, FINANCIAL_INTAKE_SCHEMA,
+    OPERATIONAL_CONTEXT_SCHEMA, assess_service_fit, normalize_context, json_safe,
+)
 from research_client import log_case, record_follow_up, retry_case_submissions
 from case_store import CASE_SCHEMA, accept_case, accept_legacy_case, CaseValidationError
 import copy
@@ -268,6 +272,13 @@ def diagnose(args):
     stage = args.get("lifecycle_stage", "")
     industry = args.get("industry", "")
     period = infer_period(industry)
+    intake = args.get("financial_intake")
+    if isinstance(intake, dict):
+        intake = dict(intake)
+        intake.setdefault("industry", industry)
+    elif intake is None:
+        intake = {"industry": industry}
+    service_fit = assess_service_fit(intake)
 
     # 五环判定
     ele = {}
@@ -319,7 +330,7 @@ def diagnose(args):
     # 老阳的土校验（效必归土，不归土则象不准、根基不稳）
     virtual_fire_warning = None
     if xiang == "老阳" and fire_returns == "negative":
-        virtual_fire_warning = "火未归土：猛增但爆发未沉淀，属虚火老阳，根基不稳"
+        virtual_fire_warning = "初筛提示：增长与沉淀信号不一致，需结合经营情境核实，不能据此断定虚火或根基不稳"
 
     # 修复排序（口径统一版）：五环检查按金→水→木→火→土逐项进行（检查有顺序）；
     # 修复动作按「损失是否迅速扩大→是否改变决策→依赖、证据、成本、可逆性」排优先级，施工无固定顺序。
@@ -344,13 +355,17 @@ def diagnose(args):
         "少阳": "引水放大：找一条有势能差的渠道，水宽了再种新树",
         "少阴": "点火造势：造一个可验证的事件，烧一次密度给市场看",
         "老阴": "归土重修：回老客数据里找残金，用老客人群包重新下刀",
-        "待判定": "补数据：需水的净增长率才能定象",
+        "待判定": "补充获客及经营情境证据，核验因果循环、三才、阶段转换和行动时机后再判断",
     }.get(xiang, "")
 
     return {
         "brand_name": brand,
         "report_language": resolve_language(args),
-        "skill_version": "2.5.1",
+        "skill_version": "2.6.0",
+        "diagnostic_revision": DIAGNOSTIC_REVISION,
+        "financial_intake": json_safe(intake),
+        "service_fit": service_fit,
+        "operational_context": normalize_context(args.get("operational_context")),
         "lifecycle_stage": stage or "未填写",
         "industry": industry or "未填写",
         "observe_period_months": period,
@@ -360,10 +375,13 @@ def diagnose(args):
         },
         "four_xiang": {
             "xiang": xiang,
+            "assessment_level": "preliminary_screen",
+            "requires_context_verification": True,
+            "assessment_note": "水火组合只作初筛，须以因果循环、三才、阶段转换与行动时机核实，不作四象定论",
             "净变化": xiang_info.get("净变化", ""),
-            "desc": xiang_info.get("特征", ""),
-            "terrain": xiang_info.get("地形", ""),
-            "action": xiang_info.get("行动", ""),
+            "desc": "初筛待情境核实：" + xiang_info.get("特征", ""),
+            "terrain": "初筛待情境核实：" + xiang_info.get("地形", ""),
+            "action": "初筛候选，待情境核实：" + xiang_info.get("行动", ""),
             "virtual_fire_warning": virtual_fire_warning
         },
         "break_chain": break_chain or ["无明显断点"],
@@ -376,7 +394,7 @@ def diagnose(args):
             "urgent_ring": urgent_ring or "未提供"
         },
         "prescription": {
-            "direction": prescription_direction,
+            "direction": "初筛候选（待情境核实）：" + prescription_direction,
             "taboos": FRAMEWORK["prescription_taboo"]
         },
         "verification_90d": {
@@ -469,7 +487,7 @@ def _generate_chain_svg(fe, brand, color):
 </svg>'''
 
 def _generate_xiang_svg(xiang_name, brand):
-    """四象定位图 SVG（X=引水能力水，Y=点火能力火，标注品牌象位）"""
+    """Legacy water/fire initial screen, not a contextual stage conclusion."""
     quad = {
         "老阳": (470, 140, "#F44336"),
         "少阳": (470, 300, "#4CAF50"),
@@ -478,7 +496,7 @@ def _generate_xiang_svg(xiang_name, brand):
     }
     bx, by, bc = quad.get(xiang_name, (340, 220, "#999999"))
     return f'''<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
-<text x="340" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">四象定位图</text>
+<text x="340" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">四象初筛图·待情境核实</text>
 <text x="340" y="52" text-anchor="middle" font-size="12" fill="#666">{brand}</text>
 <line x1="340" y1="70" x2="340" y2="380" stroke="#ccc" stroke-width="1"/>
 <line x1="90" y1="225" x2="590" y2="225" stroke="#ccc" stroke-width="1"/>
@@ -630,10 +648,13 @@ _RESEARCH_SCHEMA["properties"]["case_token"]["description"] = "Optional on the s
 for _tool in TOOLS:
     if _tool["name"] in ("generate_report", "diagnose_brand"):
         _tool["inputSchema"]["properties"].update(_LANGUAGE_PROPERTIES)
+        _tool["inputSchema"]["properties"]["financial_intake"] = copy.deepcopy(FINANCIAL_INTAKE_SCHEMA)
+        _tool["inputSchema"]["properties"]["operational_context"] = copy.deepcopy(OPERATIONAL_CONTEXT_SCHEMA)
     if _tool["name"] == "generate_report":
         _tool["description"] = "Generate a complete Chinese or English diagnosis report with three charts, conclusions, outcome-feedback invitation and free commercial use notice. Explicit report_language takes precedence over conversation_language; default zh-CN. Retains markdown/html formats. report_url exists only when a public report origin is configured; otherwise deliver report_file or inline output."
         _tool["inputSchema"]["properties"]["case_id"] = {"type": "string", "description": "Non-identifying research case ID for linking outcome feedback (never a case token)."}
     if _tool["name"] == "diagnose_brand":
+        _tool["description"] += " 利润入口先问年毛利润、净利润，再补同年同主体营收/币种/单位/口径。毛利率>40%或净利率<5%仅柔性提醒适配与收效边界，用户知情坚持则继续，绝不自动拒单；净利率无上限。四象规则标签仅初筛，须用operational_context核实。"
         _tool["inputSchema"]["properties"]["water_growth"]["description"] = "Actual net acquisition growth percentage in the stated observation window. Never convert a qualitative option into an invented number. Omit when unknown."
         _tool["inputSchema"]["properties"]["tu_natural"]["description"] = "Actual organic sales share, 0–100, with definition and observation window. Do not substitute a made-up number for an answer range; omit if unavailable."
     if _tool["name"] == "log_case":
@@ -649,6 +670,17 @@ TOOLS.extend([
 DIAGNOSIS_GUIDE["流程铁律"] = "优先复用用户已给信息。可两轮低负担收集，但不把选项值编造成实测数值。允许品牌使用化名。收集行业、阶段、商业模式、目标与约束，并记录经营指标的值/单位/分子分母/周期/口径/来源与缺失项；保留证据、反证和替代解释。诊断规则计算后生成报告。已有合法且覆盖内部研究用途的授权不逐次弹确认；未经授权资料不上传。研究回传前在本地去身份并复核组合识别风险，保留必要经营精度，使用log_case v3；主动邀请实际行动与效果反馈，反馈用record_follow_up关联初诊。"
 DIAGNOSIS_GUIDE["报告语言"] = "用户明确指定优先，其次当前对话，无法判断则zh-CN；支持en。向diagnose_brand和generate_report传report_language或conversation_language。"
 DIAGNOSIS_GUIDE["报告与回执"] = "回传失败不阻断报告；queued/local不表示远端接收成功，pending可调用retry_case_submissions。私有研究库不并入search_cases公开案例库。"
+DIAGNOSIS_GUIDE["利润入口"] = {
+    "首问": FIRST_QUESTION,
+    "补充": "复用已有答案，补同一主体/年度/会计口径的营收、币种、单位与实际或估算状态；金额可开放回答。缺失、估算、不一致待核实，零营收不计算比例，银行不套商品毛利，不用行业均值代填。",
+    "服务适配": "毛利率>40%或净利率<5%温和说明服务适配与收效边界，用户知情仍坚持则继续；不自动拒单，净利率不设上限。高毛利且低净利仅内部称贡献型，不由此推断价值或原因。",
+}
+DIAGNOSIS_GUIDE["交互铁律"] = "优先复用已知信息；可用编号选项降低负担，利润金额、口径、证据与经营情境允许开放回答。首问固定为：" + FIRST_QUESTION
+DIAGNOSIS_GUIDE["流程铁律"] = "首问固定为：" + FIRST_QUESTION + " 若已经提供则直接复用，再补同年营收、主体、年度、币种、单位、口径。利润适配为柔性提醒，知情继续不得阻断；随后 " + DIAGNOSIS_GUIDE["流程铁律"]
+DIAGNOSIS_GUIDE["理论情境"] = "operational_context记录因果循环、三才、关键门槛、四象阶段及转换、同构对照、鞍点与行动时机；无证据标未提供。水火四象标签仅初筛待情境核实，不替代阶段及因果判断。"
+FRAMEWORK["diagnostic_revision"] = DIAGNOSTIC_REVISION
+FRAMEWORK["four_xiang_screen_note"] = "旧水火规则仅初筛，不作四象阶段、地形、行动或因果定论；须补经营情境核实。"
+TOOLS.append({"name": "assess_service_fit", "description": "Pure profit-intake validation and flexible service-fit reminder; never automatically refuses a diagnosis. The thresholds are a service policy, not an industry health assessment.", "inputSchema": {"type": "object", "properties": {"financial_intake": copy.deepcopy(FINANCIAL_INTAKE_SCHEMA)}}})
 
 # ============ 工具分发 ============
 def call_tool(name, args, remote=False):
@@ -672,6 +704,8 @@ def call_tool(name, args, remote=False):
         return search_cases(args)
     if name == "diagnose_brand":
         return diagnose(args)
+    if name == "assess_service_fit":
+        return assess_service_fit(args.get("financial_intake"))
     if name == "generate_report":
         return generate_report(args)
     if name == "log_case":
@@ -708,7 +742,7 @@ def main():
             _respond(rid, {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {}},
-                "serverInfo": {"name": "zemingxingxiao-engine", "version": "2.5.1"}
+                "serverInfo": {"name": "zemingxingxiao-engine", "version": "2.6.0"}
             })
         elif method == "tools/list":
             _respond(rid, {"tools": TOOLS})

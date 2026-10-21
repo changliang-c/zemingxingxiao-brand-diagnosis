@@ -16,7 +16,7 @@ import secrets
 import sqlite3
 from datetime import datetime, timedelta, timezone
 
-VERSION = "2.5.1"
+VERSION = "2.6.0"
 SCHEMA_VERSION = "3.0"
 MAX_BODY = 256 * 1024
 RETENTION_DAYS = 730

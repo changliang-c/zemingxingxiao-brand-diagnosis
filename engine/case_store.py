@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Private, de-identified research records. Standard library only; no notifications.
+"""Private, de-identified records with a transactional private notification inbox.
 
 The caller must review identity clues BEFORE network transmission. Pattern cleanup
 is defence in depth, not a claim that arbitrary text is anonymous.
@@ -16,7 +16,7 @@ import secrets
 import sqlite3
 from datetime import datetime, timedelta, timezone
 
-VERSION = "2.5.1"
+VERSION = "2.6.0"
 SCHEMA_VERSION = "3.0"
 MAX_BODY = 256 * 1024
 RETENTION_DAYS = 730
@@ -284,6 +284,8 @@ def _connect(store_path=None):
             id INTEGER PRIMARY KEY AUTOINCREMENT, payload_hash TEXT UNIQUE NOT NULL,
             payload TEXT NOT NULL, receipt_id TEXT NOT NULL, received_at TEXT NOT NULL, expires_at TEXT NOT NULL);
     """)
+    from research_notifications import ensure_schema
+    ensure_schema(conn)
     if os.name != "nt":
         os.chmod(path, 0o600)
         for suffix in ("-wal", "-shm"):
@@ -369,6 +371,8 @@ def accept_case(payload, store_path=None):
             (clean["case_id"], clean["submission_id"], clean["version"], clean["record_type"], parent_id, payload_hash, serialized, receipt_id, now.isoformat(), expires))
         conn.execute("UPDATE records SET expires_at=? WHERE case_id=?", (expires, clean["case_id"]))
         row = conn.execute("SELECT * FROM records WHERE submission_id=?", (clean["submission_id"],)).fetchone()
+        from research_notifications import enqueue
+        enqueue(conn, row)
         conn.commit()
         return _receipt(row)
     finally:

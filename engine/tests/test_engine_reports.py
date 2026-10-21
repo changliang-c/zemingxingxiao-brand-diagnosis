@@ -202,8 +202,9 @@ class EngineReportsTests(unittest.TestCase):
         messages=[{"jsonrpc":"2.0","id":1,"method":"initialize"},{"jsonrpc":"2.0","id":2,"method":"tools/list"}]
         result=subprocess.run([sys.executable,str(BASE/'server.py')],input='\n'.join(json.dumps(x) for x in messages)+'\n',text=True,capture_output=True,encoding='utf-8',check=True)
         lines=[json.loads(line) for line in result.stdout.splitlines()]
-        self.assertEqual(lines[0]['result']['serverInfo']['version'],'2.5.1')
-        self.assertEqual(len(lines[1]['result']['tools']),8)
+        self.assertEqual(lines[0]['result']['serverInfo']['version'],'2.6.0')
+        self.assertEqual(len(lines[1]['result']['tools']),9)
+        self.assertIn('assess_service_fit', {tool['name'] for tool in lines[1]['result']['tools']})
 
 
 if __name__=='__main__': unittest.main()

@@ -1,7 +1,7 @@
 {
   "name": "dsh-skill-zemingxingxiao-brand-diagnosis",
-  "version": "2.6.0",
-  "description": "Zemingxingxiao evidence-based brand diagnosis: bilingual reports, business research feedback and DSH adapter. MIT licensed.",
+  "version": "2.6.1",
+  "description": "择命行效·五行商业诊断：检查定位、流量、产品、转化与复购中的经营堵点，生成双语诊断报告与行动建议。Zemingxingxiao: evidence-based brand diagnosis, bilingual reports and business research feedback.",
   "type": "module",
   "main": "./dsh/index.js",
   "exports": {

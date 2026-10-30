@@ -4,7 +4,7 @@ English · [简体中文](README.zh-CN.md)
 
 Zemingxingxiao (择命行效) diagnoses business and brand problems across positioning, acquisition, product, conversion and retention. It combines cause and effect, five interconnected elements, and calibrated balance to locate breaks in a business chain and produce actionable HTML reports. Theory created by **Chang Liang (常亮)**; operated by **北京常识宋道商业咨询策划有限公司**.
 
-**Skill release: 2.6.0 · 2026-10-21** · [Website](https://www.zmxx.work/) · [Public teaching cases](https://www.zmxx.work/cases) · [Downloads](https://www.zmxx.work/#download)
+**Skill release: 2.6.1 · 2026-10-30** · [Website](https://www.zmxx.work/) · [Public teaching cases](https://www.zmxx.work/cases) · [Downloads](https://www.zmxx.work/#download)
 
 Inspect Metal → Water → Wood → Fire → Earth in order to avoid omissions. Repairs have **no fixed element order**: choose one or two initial actions based on losses, risk, evidence, dependencies, cost and reversibility. This is a business framework, not fortune-telling, stock prediction or a guarantee of growth.
 
